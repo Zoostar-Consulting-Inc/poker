@@ -12,4 +12,7 @@
 		<version>3.5.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+	<modules>
+		<module>poker-core</module>
+	</modules>
 </project>

@@ -1,0 +1,41 @@
+package com.zoostarinc.poker.evaluator;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.SortedSet;
+
+import com.zoostarinc.card.Suit;
+import com.zoostarinc.poker.core.PokerCard;
+import com.zoostarinc.poker.hand.PokerHand;
+import com.zoostarinc.poker.hand.PokerHandFlush;
+
+public class FlushEvaluator implements PokerHandEvaluator {
+
+	@Override
+	public PokerHand evaluate(SortedSet<PokerCard> cards) {
+		Collection<PokerCard> suitedCards = null;
+		// Group cards by suit
+		for (Suit suit : Suit.values()) {
+			// Collect all cards of the current suit
+			suitedCards = new ArrayList<>();
+			// Add cards of the same suit
+			cards.stream().filter(card -> card.getSuit() == suit).forEach(suitedCards::add);
+			// If collected enough cards then quit the loop
+			if(suitedCards.size() >= 5) {
+				break;
+			}
+		}
+		
+		if(suitedCards != null && suitedCards.size() >= 5) {
+			for(var card : cards) {
+				if(!suitedCards.contains(card)) {
+					suitedCards.add(card);
+				}
+			}
+			return new PokerHandFlush(suitedCards);
+		}
+		
+		return null;
+	}
+
+}
