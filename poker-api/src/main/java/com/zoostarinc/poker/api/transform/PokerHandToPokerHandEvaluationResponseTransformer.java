@@ -1,4 +1,4 @@
-package com.zoostarinc.poker.transform;
+package com.zoostarinc.poker.api.transform;
 
 import com.zoostarinc.poker.api.response.PokerHandEvaluationResponse;
 import com.zoostarinc.poker.hand.PokerHand;

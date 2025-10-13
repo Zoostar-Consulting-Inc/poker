@@ -1,4 +1,4 @@
-package com.zoostarinc.poker.transform;
+package com.zoostarinc.poker.api.transform;
 
 import java.util.SortedSet;
 import java.util.TreeSet;

@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zoostarinc.poker.api.request.PokerHandEvaluationRequest;
 import com.zoostarinc.poker.api.response.PokerHandEvaluationResponse;
+import com.zoostarinc.poker.api.transform.PokerHandEvaluationRequestToSortedSetTransformer;
+import com.zoostarinc.poker.api.transform.PokerHandToPokerHandEvaluationResponseTransformer;
 import com.zoostarinc.poker.evaluator.PokerHandEvaluatorChain;
-import com.zoostarinc.poker.transform.PokerHandEvaluationRequestToSortedSetTransformer;
-import com.zoostarinc.poker.transform.PokerHandToPokerHandEvaluationResponseTransformer;
 
 import lombok.AllArgsConstructor;
 

@@ -21,6 +21,7 @@ import com.zoostarinc.card.Suit;
 import com.zoostarinc.poker.api.request.PokerHandEvaluationRequest;
 import com.zoostarinc.poker.api.response.PokerHandEvaluationResponse;
 import com.zoostarinc.poker.core.PokerCard;
+import com.zoostarinc.poker.hand.PokerHandType;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -53,6 +54,7 @@ class PokerHandEvaluatorApiTest {
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		var value = om.readValue(response.getContentAsString(), PokerHandEvaluationResponse.class);
 		assertThat(value).isNotNull();
+		assertThat(value.getType()).isEqualTo(PokerHandType.HIGH_CARD);
 	}
 
 }
