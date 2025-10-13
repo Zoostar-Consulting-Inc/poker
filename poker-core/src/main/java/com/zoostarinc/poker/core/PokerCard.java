@@ -5,9 +5,11 @@ import com.zoostarinc.card.Face;
 import com.zoostarinc.card.Suit;
 
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class PokerCard extends Card {
 

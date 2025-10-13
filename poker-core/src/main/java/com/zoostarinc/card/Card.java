@@ -1,19 +1,22 @@
 package com.zoostarinc.card;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
 @ToString
 @EqualsAndHashCode
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Card implements Comparable<Card> {
 
-	private final Face face;
+	private Face face;
 
-	private final Suit suit;
+	private Suit suit;
 
 	@Override
 	public int compareTo(Card that) {
