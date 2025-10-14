@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,7 @@ class PokerHandEvaluatorApiTest {
 	void testEvaluate() throws Exception {
 		// given
 		String url = "/evaluate";
-		Collection<PokerCard> cards = new ArrayList<>();
+		var cards = new ArrayList<PokerCard>();
 		cards.add(new PokerCard(Face.ACE, Suit.CLUB));
 		var request = new PokerHandEvaluationRequest(cards);
 
