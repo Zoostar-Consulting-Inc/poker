@@ -10,7 +10,7 @@ server:
 logging:
   level:
     root: info
-    '[net.zoostar]': debug
+    '[net.zoostar]': trace
     '[com.zoostarinc]': trace
 
 logs:
