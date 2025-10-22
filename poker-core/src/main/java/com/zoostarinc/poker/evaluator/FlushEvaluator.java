@@ -1,7 +1,7 @@
 package com.zoostarinc.poker.evaluator;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import java.util.SortedSet;
 
 import com.zoostarinc.card.Suit;
@@ -13,7 +13,7 @@ public class FlushEvaluator implements PokerHandEvaluator {
 
 	@Override
 	public PokerHand evaluate(SortedSet<PokerCard> cards) {
-		Collection<PokerCard> suitedCards = null;
+		List<PokerCard> suitedCards = null;
 		// Group cards by suit
 		for (Suit suit : Suit.values()) {
 			// Collect all cards of the current suit
@@ -27,12 +27,7 @@ public class FlushEvaluator implements PokerHandEvaluator {
 		}
 		
 		if(suitedCards != null && suitedCards.size() >= 5) {
-			for(var card : cards) {
-				if(!suitedCards.contains(card)) {
-					suitedCards.add(card);
-				}
-			}
-			return new PokerHandFlush(suitedCards);
+			return new PokerHandFlush(suitedCards.subList(0, 5));
 		}
 		
 		return null;

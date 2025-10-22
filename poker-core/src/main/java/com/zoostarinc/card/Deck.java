@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Deck {
+public class Deck<T extends Card<T>> {
 	
-	private Collection<Card> cards;
+	private Collection<T> cards;
 	
 }

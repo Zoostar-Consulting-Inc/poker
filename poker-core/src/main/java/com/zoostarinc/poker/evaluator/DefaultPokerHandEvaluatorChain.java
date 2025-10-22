@@ -9,7 +9,6 @@ import org.springframework.util.CollectionUtils;
 
 import com.zoostarinc.poker.core.PokerCard;
 import com.zoostarinc.poker.hand.PokerHand;
-import com.zoostarinc.poker.hand.PokerHandHighCard;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +29,7 @@ public class DefaultPokerHandEvaluatorChain implements PokerHandEvaluatorChain {
 		this.evaluators = new ArrayList<>();
 		this.evaluators.add(new RoyalFlushEvaluator());
 		this.evaluators.add(new StraightFlushEvaluator());
+		this.evaluators.add(new FourOfAKindEvaluator());
 		this.evaluators.add(new FullHouseEvaluator());
 		this.evaluators.add(new FlushEvaluator());
 		this.evaluators.add(new StraightEvaluator());
@@ -54,7 +54,7 @@ public class DefaultPokerHandEvaluatorChain implements PokerHandEvaluatorChain {
 		}
 		
 		if(hand == null) {
-			hand = new PokerHandHighCard(unmodifiableCards);
+			hand = new HighCardEvaluator().evaluate(unmodifiableCards);
 		}
 		
 		log.info("Evaluated hand: {}", hand);
