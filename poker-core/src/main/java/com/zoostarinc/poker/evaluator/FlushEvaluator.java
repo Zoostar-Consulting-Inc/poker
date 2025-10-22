@@ -20,14 +20,10 @@ public class FlushEvaluator implements PokerHandEvaluator {
 			suitedCards = new ArrayList<>();
 			// Add cards of the same suit
 			cards.stream().filter(card -> card.getSuit() == suit).forEach(suitedCards::add);
-			// If collected enough cards then quit the loop
+			// If collected enough cards then return with Flush Hand
 			if(suitedCards.size() >= 5) {
-				break;
+				return new PokerHandFlush(suitedCards.subList(0, 5));
 			}
-		}
-		
-		if(suitedCards != null && suitedCards.size() >= 5) {
-			return new PokerHandFlush(suitedCards.subList(0, 5));
 		}
 		
 		return null;
