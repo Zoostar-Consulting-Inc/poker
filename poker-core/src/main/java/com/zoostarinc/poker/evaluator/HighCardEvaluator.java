@@ -1,6 +1,5 @@
 package com.zoostarinc.poker.evaluator;
 
-import java.util.Collections;
 import java.util.SortedSet;
 
 import com.zoostarinc.poker.core.PokerCard;
@@ -11,7 +10,7 @@ public class HighCardEvaluator implements PokerHandEvaluator {
 
 	@Override
 	public PokerHand evaluate(SortedSet<PokerCard> cards) {
-		return new PokerHandHighCard(Collections.singletonList(cards.first()));
+		return new PokerHandHighCard(cards);
 	}
 
 }
