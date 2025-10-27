@@ -24,7 +24,7 @@ import com.zoostarinc.poker.hand.PokerHandType;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class PokerHandEvaluatorApiTest {
+class PokerApiTest {
 
 	protected ObjectMapper om = objectMapper();
 

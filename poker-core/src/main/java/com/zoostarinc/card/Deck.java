@@ -1,16 +1,11 @@
 package com.zoostarinc.card;
 
-import java.util.Collection;
+import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import net.zoostar.common.Shuffleable;
 
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-public class Deck<T extends Card<T>> {
+public interface Deck<T extends Card<T>> extends Shuffleable<T> {
 	
-	private Collection<T> cards;
+	List<T> getCards();
 	
 }
