@@ -23,7 +23,7 @@ public class Main implements WebMvcConfigurer {
 	@Bean
 	OpenAPI openAPI() {
 		return new OpenAPI().info(new Info().title("Poker API")
-				.description("This API provides CRUD operations for Employees with OAuth2 security."));
+				.description("This API provides operations for Poker."));
 	}
 	
 	@Override
