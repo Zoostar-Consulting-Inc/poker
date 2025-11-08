@@ -12,18 +12,19 @@ import lombok.ToString;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Card<T extends Card<T>> implements Comparable<T> {
+public class Card implements Comparable<Card> {
 
 	private Face face;
 
 	private Suit suit;
 
 	@Override
-	public int compareTo(T that) {
-		if (that.getFace().compareTo(this.getFace()) == 0) {
+	public int compareTo(Card that) {
+		int result = that.getFace().compareTo(this.getFace());
+		if (result == 0) {
 			return that.getSuit().compareTo(this.getSuit());
 		}
-		return that.getFace().compareTo(this.getFace());
+		return result;
 	}
 
 }

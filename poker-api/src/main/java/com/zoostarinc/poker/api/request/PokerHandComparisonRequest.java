@@ -2,7 +2,7 @@ package com.zoostarinc.poker.api.request;
 
 import java.util.List;
 
-import com.zoostarinc.poker.core.PokerCard;
+import com.zoostarinc.card.Card;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,8 +17,8 @@ import lombok.ToString;
 @ToString
 public class PokerHandComparisonRequest {
 
-	private List<PokerCard> cards1;
+	private List<Card> cards1;
 
-	private List<PokerCard> cards2;
+	private List<Card> cards2;
 	
 }

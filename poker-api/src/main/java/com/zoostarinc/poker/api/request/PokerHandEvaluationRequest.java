@@ -2,7 +2,7 @@ package com.zoostarinc.poker.api.request;
 
 import java.util.Collection;
 
-import com.zoostarinc.poker.core.PokerCard;
+import com.zoostarinc.card.Card;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,6 +17,6 @@ import lombok.ToString;
 @AllArgsConstructor
 public class PokerHandEvaluationRequest {
 
-	private Collection<PokerCard> cards;
+	private Collection<Card> cards;
 	
 }

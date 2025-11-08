@@ -10,7 +10,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import lombok.Generated;
 
+@Generated
 @SpringBootApplication
 @EnableAspectJAutoProxy
 @ComponentScan(basePackages = { "net.zoostar", "com.zoostarinc" })

@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.SortedSet;
 
-import com.zoostarinc.poker.core.PokerCard;
+import com.zoostarinc.card.Card;
 import com.zoostarinc.poker.hand.PokerHand;
-import com.zoostarinc.poker.hand.PokerHandFourOfAKind;
+import com.zoostarinc.poker.hand.PokerHandType;
 
 public class FourOfAKindEvaluator implements PokerHandEvaluator {
 
 	@Override
-	public PokerHand evaluate(SortedSet<PokerCard> cards) {
+	public PokerHand evaluate(SortedSet<Card> cards) {
 		PokerHand hand = null;
-		PokerCard previous = null;
-		PokerCard current = null;
+		Card previous = null;
+		Card current = null;
 		var it = cards.iterator();
-		Collection<PokerCard> fourOfAKind = new ArrayList<>(DefaultPokerHandEvaluatorChain.MAX_CARDS);
+		Collection<Card> fourOfAKind = new ArrayList<>(DefaultPokerHandEvaluatorChain.MAX_CARDS);
 		while (fourOfAKind.size() < 3 && it.hasNext()) {
 			current = it.next();
 			if (previous != null && previous.getFace() == current.getFace()) {
@@ -33,7 +33,7 @@ public class FourOfAKindEvaluator implements PokerHandEvaluator {
 			if (current != null) {
 				fourOfAKind.add(current);
 			}
-			hand = new PokerHandFourOfAKind(fourOfAKind);
+			hand = new PokerHand(PokerHandType.FOUR_OF_A_KIND, fourOfAKind);
 		} else {
 			hand = null;
 		}

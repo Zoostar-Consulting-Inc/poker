@@ -3,18 +3,21 @@ package com.zoostarinc.poker;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import com.zoostarinc.card.Card;
 import com.zoostarinc.card.Face;
 import com.zoostarinc.card.Suit;
-import com.zoostarinc.poker.core.PokerCard;
 
 public final class Utils {
 
+	public static final int EQUAL = 0;
+	public static final int CONSECUTIVE = 1;
+	
 	private Utils() {
 		// Helper class
 	}
 
-	public static SortedSet<PokerCard> getFlushCards(SortedSet<PokerCard> cards) {
-		SortedSet<PokerCard> flush = new TreeSet<>();
+	public static SortedSet<Card> getFlushCards(SortedSet<Card> cards) {
+		SortedSet<Card> flush = new TreeSet<>();
 		for (Suit suit : Suit.values()) {
 			cards.stream().filter(card -> card.getSuit().equals(suit)).forEach(flush::add);
 			if (!flush.isEmpty() && flush.size() < 5) {
@@ -24,27 +27,27 @@ public final class Utils {
 		return flush;
 	}
 
-	public static SortedSet<PokerCard> getStraightCards(SortedSet<PokerCard> cards) {
-		PokerCard previous = null;
-		PokerCard current = null;
+	public static SortedSet<Card> getStraightCards(SortedSet<Card> cards) {
+		Card previous = null;
+		Card current = null;
 		int result = -1;
-		SortedSet<PokerCard> straight = new TreeSet<>();
+		SortedSet<Card> straight = new TreeSet<>();
 		var it = cards.iterator();
-		PokerCard ace = null;
+		Card ace = null;
 		while (straight.size() < 4 && it.hasNext()) {
 			current = it.next();
 			if (current.getFace() == Face.ACE) {
 				ace = current;
 			}
-			if (previous != null && (result = previous.getFace().compareTo(current.getFace()) - 1) == 0) {
+			if (previous != null && (result = previous.getFace().compareTo(current.getFace())) == CONSECUTIVE) {
 				straight.add(previous);
-			} else {
+			} else if (result != EQUAL && !straight.isEmpty()) {
 				straight.clear();
 			}
 			previous = current;
 		}
 
-		if (result == 0 && straight.size() < 5) {
+		if (result == CONSECUTIVE && straight.size() < 5) {
 			straight.add(current);
 		}
 

@@ -4,8 +4,8 @@ import java.util.List;
 
 import net.zoostar.common.Shuffleable;
 
-public interface Deck<T extends Card<T>> extends Shuffleable<T> {
+public interface Deck extends Shuffleable<Card> {
 	
-	List<T> getCards();
+	List<Card> getCards();
 	
 }

@@ -8,8 +8,9 @@ import java.util.TreeSet;
 
 import org.springframework.util.CollectionUtils;
 
-import com.zoostarinc.poker.core.PokerCard;
+import com.zoostarinc.card.Card;
 import com.zoostarinc.poker.hand.PokerHand;
+import com.zoostarinc.poker.hand.PokerHandType;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +41,7 @@ public class DefaultPokerHandEvaluatorChain implements PokerHandEvaluatorChain {
 	}
 
 	@Override
-	public PokerHand evaluate(Collection<PokerCard> cards) {
+	public PokerHand evaluate(Collection<Card> cards) {
 		if (CollectionUtils.isEmpty(cards) || cards.size() > MAX_CARDS) {
 			throw new IllegalArgumentException(ILLEGAL_ARG_EXCEPTION_MSG);
 		}
@@ -55,7 +56,7 @@ public class DefaultPokerHandEvaluatorChain implements PokerHandEvaluatorChain {
 		}
 
 		if (hand == null) {
-			hand = new HighCardEvaluator().evaluate(unmodifiableCards);
+			hand = new PokerHand(PokerHandType.HIGH_CARD, unmodifiableCards);
 		}
 
 		log.info("Evaluated hand: {}", hand);

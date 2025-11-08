@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.SortedSet;
 
-import com.zoostarinc.poker.core.PokerCard;
+import com.zoostarinc.card.Card;
 import com.zoostarinc.poker.hand.PokerHand;
-import com.zoostarinc.poker.hand.PokerHandTwoPair;
+import com.zoostarinc.poker.hand.PokerHandType;
 
 public class TwoPairEvaluator implements PokerHandEvaluator {
 
 	@Override
-	public PokerHand evaluate(SortedSet<PokerCard> cards) {
+	public PokerHand evaluate(SortedSet<Card> cards) {
 		PokerHand hand = null;
-		PokerCard previous = null;
+		Card previous = null;
 		var it = cards.iterator();
-		Collection<PokerCard> pairCards = new ArrayList<>(DefaultPokerHandEvaluatorChain.MAX_CARDS);
+		Collection<Card> pairCards = new ArrayList<>(DefaultPokerHandEvaluatorChain.MAX_CARDS);
 		while (pairCards.size() < 4 && it.hasNext()) {
 			var current = it.next();
 			if (previous != null && previous.getFace() == current.getFace()) {
@@ -26,7 +26,7 @@ public class TwoPairEvaluator implements PokerHandEvaluator {
 		}
 
 		if (pairCards.size() > 3) {
-			hand = new PokerHandTwoPair(pairCards);
+			hand = new PokerHand(PokerHandType.TWO_PAIR, pairCards);
 		} else {
 			hand = null;
 		}

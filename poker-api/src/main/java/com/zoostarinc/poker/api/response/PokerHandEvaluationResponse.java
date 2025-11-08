@@ -2,7 +2,7 @@ package com.zoostarinc.poker.api.response;
 
 import java.util.Collection;
 
-import com.zoostarinc.poker.core.PokerCard;
+import com.zoostarinc.card.Card;
 import com.zoostarinc.poker.hand.PokerHandType;
 
 import lombok.AllArgsConstructor;
@@ -20,6 +20,6 @@ public class PokerHandEvaluationResponse {
 
 	private PokerHandType type;
 	
-	private Collection<PokerCard> cards;
+	private Collection<Card> cards;
 	
 }
