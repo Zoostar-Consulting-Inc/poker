@@ -1,7 +1,7 @@
 package com.zoostarinc.poker.evaluator;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Iterator;
 import java.util.SortedSet;
 
 import com.zoostarinc.card.Card;
@@ -12,26 +12,25 @@ public class OnePairEvaluator implements PokerHandEvaluator {
 
 	@Override
 	public PokerHand evaluate(SortedSet<Card> cards) {
-		PokerHand hand = null;
-		Card previous = null;
-		var it = cards.iterator();
-		Collection<Card> pairCards = new ArrayList<>(DefaultPokerHandEvaluatorChain.MAX_CARDS);
-		while (pairCards.size() < 2 && it.hasNext()) {
-			var current = it.next();
-			if (previous != null && previous.getFace() == current.getFace()) {
-				pairCards.add(previous);
-				pairCards.add(current);
+		// Quick fail: need at least two cards to form a pair
+		if (cards == null || cards.size() < 2) {
+			return null;
+		}
+
+		Iterator<Card> it = cards.iterator();
+		Card previous = it.next();
+		while (it.hasNext()) {
+			Card current = it.next();
+			if (previous.getFace() == current.getFace()) {
+				var pair = new ArrayList<Card>(2);
+				pair.add(previous);
+				pair.add(current);
+				return new PokerHand(PokerHandType.ONE_PAIR, pair);
 			}
 			previous = current;
 		}
 
-		if (pairCards.size() > 1) {
-			hand = new PokerHand(PokerHandType.ONE_PAIR, pairCards);
-		} else {
-			hand = null;
-		}
-
-		return hand;
+		return null;
 	}
 
 }
