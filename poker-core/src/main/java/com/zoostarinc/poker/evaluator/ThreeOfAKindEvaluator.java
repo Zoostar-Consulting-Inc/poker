@@ -12,54 +12,33 @@ public class ThreeOfAKindEvaluator implements PokerHandEvaluator {
 
 	@Override
 	public PokerHand evaluate(SortedSet<Card> cards) {
-		// Track consecutive equal-face cards. Face is an enum, so '==' is safe.
+		PokerHand hand = null;
 		Card previous = null;
-		int sameCount = 0;
-		Card[] buffer = new Card[3]; // store up to first 3 matching cards
+		Card current = null;
 		var it = cards.iterator();
-
-		while (it.hasNext()) {
-			Card current = it.next();
-
-			if (previous == null) {
-				previous = current;
-				sameCount = 1;
-				buffer[0] = current;
-				continue;
-			}
-
-			if (previous.getFace() == current.getFace()) {
-				if (sameCount < 3) {
-					buffer[sameCount] = current;
-				}
-				sameCount++;
+		Collection<Card> threeOfAKind = new ArrayList<>(DefaultPokerHandEvaluatorChain.MAX_CARDS);
+		while (threeOfAKind.size() < 2 && it.hasNext()) {
+			current = it.next();
+			if (previous != null && previous.getFace() == current.getFace()) {
+				threeOfAKind.add(previous);
 				previous = current;
 			} else {
-				// rank changed: if we already saw >=3 in a row, return the triple
-				if (sameCount >= 3) {
-					Collection<Card> result = new ArrayList<>(3);
-					result.add(buffer[0]);
-					result.add(buffer[1]);
-					result.add(buffer[2]);
-					return new PokerHand(PokerHandType.THREE_OF_A_KIND, result);
-				}
-				// reset tracking for new rank
+				threeOfAKind.clear();
 				previous = current;
-				sameCount = 1;
-				buffer[0] = current;
+				current = null;
 			}
 		}
 
-		// final check after iteration
-		if (sameCount >= 3) {
-			Collection<Card> result = new ArrayList<>(3);
-			result.add(buffer[0]);
-			result.add(buffer[1]);
-			result.add(buffer[2]);
-			return new PokerHand(PokerHandType.THREE_OF_A_KIND, result);
+		if (threeOfAKind.size() > 1) {
+			if (current != null) {
+				threeOfAKind.add(current);
+			}
+			hand = new PokerHand(PokerHandType.THREE_OF_A_KIND, threeOfAKind);
+		} else {
+			hand = null;
 		}
 
-		return null;
+		return hand;
 	}
 
 }
