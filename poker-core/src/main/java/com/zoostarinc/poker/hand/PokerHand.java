@@ -13,7 +13,6 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Getter
 @Setter
 @ToString
 @EqualsAndHashCode
@@ -24,8 +23,10 @@ public class PokerHand implements Comparable<PokerHand> {
 
 	private final PokerCardComparator comparator = new PokerCardComparator();
 
+	@Getter
 	private PokerHandType type;
 
+	@Getter
 	private Collection<Card> cards;
 
 	public PokerHand(PokerHandType type, Collection<Card> cards) {
@@ -46,7 +47,8 @@ public class PokerHand implements Comparable<PokerHand> {
 		int result = 0;
 		var itThis = this.getCards().iterator();
 		var itThat = cards.iterator();
-		while (itThis.hasNext() && itThat.hasNext()) {
+		int i = 0;
+		while (itThis.hasNext() && itThat.hasNext() && i++ < 5) {
 			result = comparator.compare(itThis.next(), itThat.next());
 			if (result != 0) {
 				return result;

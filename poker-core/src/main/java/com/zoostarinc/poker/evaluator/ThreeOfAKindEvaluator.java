@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.SortedSet;
 
+import org.springframework.util.CollectionUtils;
+
 import com.zoostarinc.card.Card;
 import com.zoostarinc.poker.hand.PokerHand;
 import com.zoostarinc.poker.hand.PokerHandType;
@@ -23,7 +25,9 @@ public class ThreeOfAKindEvaluator implements PokerHandEvaluator {
 				threeOfAKind.add(previous);
 				previous = current;
 			} else {
-				threeOfAKind.clear();
+				if(!CollectionUtils.isEmpty(threeOfAKind)) {
+					threeOfAKind.clear();
+				}
 				previous = current;
 				current = null;
 			}
