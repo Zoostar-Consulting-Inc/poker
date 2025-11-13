@@ -1,15 +1,16 @@
 package com.zoostarinc.poker.evaluator;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.springframework.util.CollectionUtils;
 
-import com.zoostarinc.poker.core.PokerCard;
+import com.zoostarinc.card.Card;
 import com.zoostarinc.poker.hand.PokerHand;
-import com.zoostarinc.poker.hand.PokerHandHighCard;
+import com.zoostarinc.poker.hand.PokerHandType;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Getter
 public class DefaultPokerHandEvaluatorChain implements PokerHandEvaluatorChain {
-	
+
 	public static final int MAX_CARDS = 7;
 
 	public static final String ILLEGAL_ARG_EXCEPTION_MSG = "Expected minimum of 1 and maximum of 7 cards only!";
@@ -30,6 +31,7 @@ public class DefaultPokerHandEvaluatorChain implements PokerHandEvaluatorChain {
 		this.evaluators = new ArrayList<>();
 		this.evaluators.add(new RoyalFlushEvaluator());
 		this.evaluators.add(new StraightFlushEvaluator());
+		this.evaluators.add(new FourOfAKindEvaluator());
 		this.evaluators.add(new FullHouseEvaluator());
 		this.evaluators.add(new FlushEvaluator());
 		this.evaluators.add(new StraightEvaluator());
@@ -39,12 +41,12 @@ public class DefaultPokerHandEvaluatorChain implements PokerHandEvaluatorChain {
 	}
 
 	@Override
-	public PokerHand evaluate(SortedSet<PokerCard> cards) {
+	public PokerHand evaluate(Collection<Card> cards) {
 		if (CollectionUtils.isEmpty(cards) || cards.size() > MAX_CARDS) {
 			throw new IllegalArgumentException(ILLEGAL_ARG_EXCEPTION_MSG);
 		}
 
-		var unmodifiableCards = Collections.unmodifiableSortedSet(cards);
+		var unmodifiableCards = Collections.unmodifiableSortedSet(new TreeSet<>(cards));
 		PokerHand hand = null;
 		var it = evaluators.iterator();
 		while (it.hasNext() && hand == null) {
@@ -52,11 +54,11 @@ public class DefaultPokerHandEvaluatorChain implements PokerHandEvaluatorChain {
 			log.info("Evaluating if hand is a {}", evaluator);
 			hand = evaluator.evaluate(unmodifiableCards);
 		}
-		
-		if(hand == null) {
-			hand = new PokerHandHighCard(unmodifiableCards);
+
+		if (hand == null) {
+			hand = new PokerHand(PokerHandType.HIGH_CARD, unmodifiableCards);
 		}
-		
+
 		log.info("Evaluated hand: {}", hand);
 		return hand;
 	}

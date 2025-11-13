@@ -1,0 +1,19 @@
+# --- Spring Boot specific properties ---
+server:
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+    min-response-size: 2048
+# --- xxx ---
+
+# --- Application specific properties per environment ---
+logging:
+  level:
+    root: info
+    '[net.zoostar]': trace
+    '[com.zoostarinc]': trace
+
+logs:
+  base:
+    dir: logs
+# --- xxx ---

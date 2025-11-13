@@ -1,43 +1,36 @@
 package com.zoostarinc.poker.evaluator;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Iterator;
 import java.util.SortedSet;
 
-import com.zoostarinc.poker.core.PokerCard;
+import com.zoostarinc.card.Card;
 import com.zoostarinc.poker.hand.PokerHand;
-import com.zoostarinc.poker.hand.PokerHandOnePair;
+import com.zoostarinc.poker.hand.PokerHandType;
 
 public class OnePairEvaluator implements PokerHandEvaluator {
 
 	@Override
-	public PokerHand evaluate(SortedSet<PokerCard> cards) {
-		PokerHand hand = null;
-		PokerCard previous = null;
-		int pair = 0;
-		var it = cards.iterator();
-		Collection<PokerCard> pairCards = new ArrayList<>(DefaultPokerHandEvaluatorChain.MAX_CARDS);
-		while (pair < 1 && it.hasNext()) {
-			var current = it.next();
-			if (previous != null && previous.getFace() == current.getFace()) {
-				pairCards.add(current);
-				pair++;
+	public PokerHand evaluate(SortedSet<Card> cards) {
+		// Quick fail: need at least two cards to form a pair
+		if (cards == null || cards.size() < 2) {
+			return null;
+		}
+
+		Iterator<Card> it = cards.iterator();
+		Card previous = it.next();
+		while (it.hasNext()) {
+			Card current = it.next();
+			if (previous.getFace() == current.getFace()) {
+				var pair = new ArrayList<Card>(2);
+				pair.add(previous);
+				pair.add(current);
+				return new PokerHand(PokerHandType.ONE_PAIR, pair);
 			}
 			previous = current;
 		}
 
-		if (pair > 0) {
-			for(var card : cards) {
-				if(!pairCards.contains(card)) {
-					pairCards.add(card);
-				}
-			}
-			hand = new PokerHandOnePair(pairCards);
-		} else {
-			hand = null;
-		}
-
-		return hand;
+		return null;
 	}
 
 }

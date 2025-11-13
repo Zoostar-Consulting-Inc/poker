@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.SortedSet;
 
-import org.springframework.util.CollectionUtils;
-
 import com.zoostarinc.card.Card;
 import com.zoostarinc.poker.hand.PokerHand;
 import com.zoostarinc.poker.hand.PokerHandType;
 
-public class ThreeOfAKindEvaluator implements PokerHandEvaluator {
+public class FourOfAKindEvaluator implements PokerHandEvaluator {
 
 	@Override
 	public PokerHand evaluate(SortedSet<Card> cards) {
@@ -18,26 +16,24 @@ public class ThreeOfAKindEvaluator implements PokerHandEvaluator {
 		Card previous = null;
 		Card current = null;
 		var it = cards.iterator();
-		Collection<Card> threeOfAKind = new ArrayList<>(DefaultPokerHandEvaluatorChain.MAX_CARDS);
-		while (threeOfAKind.size() < 2 && it.hasNext()) {
+		Collection<Card> fourOfAKind = new ArrayList<>(DefaultPokerHandEvaluatorChain.MAX_CARDS);
+		while (fourOfAKind.size() < 3 && it.hasNext()) {
 			current = it.next();
 			if (previous != null && previous.getFace() == current.getFace()) {
-				threeOfAKind.add(previous);
+				fourOfAKind.add(previous);
 				previous = current;
 			} else {
-				if(!CollectionUtils.isEmpty(threeOfAKind)) {
-					threeOfAKind.clear();
-				}
+				fourOfAKind.clear();
 				previous = current;
 				current = null;
 			}
 		}
 
-		if (threeOfAKind.size() > 1) {
+		if (fourOfAKind.size() > 2) {
 			if (current != null) {
-				threeOfAKind.add(current);
+				fourOfAKind.add(current);
 			}
-			hand = new PokerHand(PokerHandType.THREE_OF_A_KIND, threeOfAKind);
+			hand = new PokerHand(PokerHandType.FOUR_OF_A_KIND, fourOfAKind);
 		} else {
 			hand = null;
 		}

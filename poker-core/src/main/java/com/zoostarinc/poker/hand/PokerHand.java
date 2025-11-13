@@ -1,57 +1,56 @@
 package com.zoostarinc.poker.hand;
 
 import java.util.Collection;
-import java.util.Comparator;
 
-import com.zoostarinc.poker.core.PokerCard;
+import com.zoostarinc.card.Card;
 import com.zoostarinc.poker.core.PokerCardComparator;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Getter
 @Setter
 @ToString
 @EqualsAndHashCode
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class PokerHand implements Comparable<PokerHand> {
+@NoArgsConstructor
+public class PokerHand implements Comparable<PokerHand> {
 
 	public static final int MAX_POKER_CARD_SIZE = 7;
 
+	private final PokerCardComparator comparator = new PokerCardComparator();
+
+	@Getter
 	private PokerHandType type;
-	
-	private Comparator<PokerCard> comparator;
-	
-	private final Collection<PokerCard> cards;
-	
-	protected PokerHand(PokerHandType type, Collection<PokerCard> cards) {
+
+	@Getter
+	private Collection<Card> cards;
+
+	public PokerHand(PokerHandType type, Collection<Card> cards) {
 		this.type = type;
 		this.cards = cards;
-		this.comparator = new PokerCardComparator();
 	}
 
 	@Override
 	public int compareTo(PokerHand that) {
-		if(this.getType() == that.getType()) {
+		if (this.getType() == that.getType()) {
 			return compare(that.getCards());
 		} else {
 			return this.getType().compareTo(that.getType());
 		}
 	}
 
-	protected int compare(Collection<PokerCard> cards) {
+	protected int compare(Collection<Card> cards) {
 		int result = 0;
 		var itThis = this.getCards().iterator();
 		var itThat = cards.iterator();
-		while(itThis.hasNext() && itThat.hasNext()) {
+		int i = 0;
+		while (itThis.hasNext() && itThat.hasNext() && i++ < 5) {
 			result = comparator.compare(itThis.next(), itThat.next());
-			if(result != 0) {
+			if (result != 0) {
 				return result;
 			}
 		}

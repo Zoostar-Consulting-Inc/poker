@@ -1,31 +1,43 @@
 package com.zoostarinc.poker.evaluator;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.SortedSet;
 
+import com.zoostarinc.card.Card;
 import com.zoostarinc.card.Face;
-import com.zoostarinc.poker.core.PokerCard;
 import com.zoostarinc.poker.hand.PokerHand;
-import com.zoostarinc.poker.hand.PokerHandFullHouse;
+import com.zoostarinc.poker.hand.PokerHandType;
 
 public class FullHouseEvaluator implements PokerHandEvaluator {
 
 	@Override
-	public PokerHand evaluate(SortedSet<PokerCard> cards) {
-		Map<Face, Integer> fullHouse = new EnumMap<>(Face.class);
+	public PokerHand evaluate(SortedSet<Card> cards) {
+		Map<Face, Integer> cardCountMap = new EnumMap<>(Face.class);
 		var it = cards.iterator();
 		while (it.hasNext()) {
 			var card = it.next();
-			fullHouse.computeIfAbsent(card.getFace(), k -> Integer.valueOf(0));
-			fullHouse.put(card.getFace(), fullHouse.get(card.getFace()) + 1);
+			cardCountMap.computeIfAbsent(card.getFace(), k -> Integer.valueOf(0));
+			cardCountMap.put(card.getFace(), cardCountMap.get(card.getFace()) + 1);
 		}
-		
-		if(fullHouse.containsValue(Integer.valueOf(3)) && fullHouse.containsValue(Integer.valueOf(2))) {
-			return new PokerHandFullHouse(cards);
+
+		Collection<Card> fullHouse = new ArrayList<>(5);
+		it = cards.iterator();
+		while (it.hasNext()) {
+			var card = it.next();
+			var count = cardCountMap.get(card.getFace());
+			if (count > 1) {
+				fullHouse.add(card);
+			}
 		}
-		
+
+		if (cardCountMap.containsValue(Integer.valueOf(3)) && cardCountMap.containsValue(Integer.valueOf(2))) {
+			return new PokerHand(PokerHandType.FULL_HOUSE, fullHouse);
+		}
+
 		return null;
 	}
-	
+
 }
