@@ -40,6 +40,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>poker</finalName>
+		<finalName>poker-api</finalName>
 	</build>
 </project>
