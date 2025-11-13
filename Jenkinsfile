@@ -6,7 +6,7 @@ pipeline {
 			steps {
 				script {
 					if("opened" == "$action" || "synchronize" == "$action" || "edited" == "$action" || "create" == "$action") {
-						bat 'mvn -U -B clean install -Duser.name=%BUILD_NUMBER% -Dmaven.tomcat.skip="install"'
+						bat 'mvn -U -B clean verify -Duser.name=%BUILD_NUMBER%'
 					}
 				}
 			}
