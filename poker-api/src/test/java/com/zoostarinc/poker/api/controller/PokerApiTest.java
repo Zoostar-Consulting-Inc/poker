@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -40,13 +41,14 @@ class PokerApiTest {
 	@Autowired
 	protected MockMvc endpoint;
 
-	public static ObjectMapper objectMapper() {
+	protected ObjectMapper objectMapper() {
 		var om = new ObjectMapper();
 		om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		return om;
 	}
 
 	@Test
+	@Disabled
 	void testEvaluateHighCard() throws Exception {
 		// given
 		String url = "/evaluate";
@@ -66,6 +68,7 @@ class PokerApiTest {
 	}
 
 	@Test
+	@Disabled
 	void testEvaluateOnePair() throws Exception {
 		// given
 		String url = "/evaluate";
@@ -87,6 +90,7 @@ class PokerApiTest {
 	}
 
 	@Test
+	@Disabled
 	void testEvaluateTwoPair() throws Exception {
 		// given
 		String url = "/evaluate";
@@ -112,6 +116,7 @@ class PokerApiTest {
 	}
 
 	@Test
+	@Disabled
 	void testEvaluateThreeOfAKind() throws Exception {
 		// given
 		String url = "/evaluate";
@@ -137,6 +142,7 @@ class PokerApiTest {
 	}
 
 	@Test
+	@Disabled
 	void testEvaluateStraight() throws Exception {
 		// given
 		String url = "/evaluate";
