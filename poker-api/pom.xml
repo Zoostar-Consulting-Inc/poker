@@ -9,6 +9,9 @@
 		<artifactId>poker-parent</artifactId>
 		<version>3.0.0-SNAPSHOT</version>
 	</parent>
+	<properties>
+		<sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.zoostarinc.poker</groupId>
