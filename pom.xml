@@ -38,6 +38,9 @@
 					<execution>
 						<id>sonar-scan</id>
 						<phase>verify</phase>
+						<goals>
+							<goal>sonar</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
