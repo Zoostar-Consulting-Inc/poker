@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -48,7 +47,6 @@ class PokerApiTest {
 	}
 
 	@Test
-	@Disabled
 	void testEvaluateHighCard() throws Exception {
 		// given
 		String url = "/evaluate";
@@ -68,7 +66,6 @@ class PokerApiTest {
 	}
 
 	@Test
-	@Disabled
 	void testEvaluateOnePair() throws Exception {
 		// given
 		String url = "/evaluate";
@@ -90,7 +87,6 @@ class PokerApiTest {
 	}
 
 	@Test
-	@Disabled
 	void testEvaluateTwoPair() throws Exception {
 		// given
 		String url = "/evaluate";
@@ -116,7 +112,6 @@ class PokerApiTest {
 	}
 
 	@Test
-	@Disabled
 	void testEvaluateThreeOfAKind() throws Exception {
 		// given
 		String url = "/evaluate";
@@ -142,7 +137,6 @@ class PokerApiTest {
 	}
 
 	@Test
-	@Disabled
 	void testEvaluateStraight() throws Exception {
 		// given
 		String url = "/evaluate";
