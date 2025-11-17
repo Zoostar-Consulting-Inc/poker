@@ -13,7 +13,7 @@ public class OnePairEvaluator implements PokerHandEvaluator {
 	@Override
 	public PokerHand evaluate(SortedSet<Card> cards) {
 		// Quick fail: need at least two cards to form a pair
-		if (cards == null || cards.size() < 2) {
+		if (cards.size() < 2) {
 			return null;
 		}
 

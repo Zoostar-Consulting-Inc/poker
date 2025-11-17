@@ -94,7 +94,7 @@ class PokerApiTest {
 		cards.add(new Card(Face.ACE, Suit.CLUB));
 		cards.add(new Card(Face.SIX, Suit.HEART));
 		cards.add(new Card(Face.SIX, Suit.DIAMOND));
-		cards.add(new Card(Face.TEN, Suit.HEART));
+		cards.add(new Card(Face.TWO, Suit.HEART));
 		cards.add(new Card(Face.TWO, Suit.SPADE));
 		cards.add(new Card(Face.TEN, Suit.HEART));
 		cards.add(new Card(Face.TEN, Suit.DIAMOND));
