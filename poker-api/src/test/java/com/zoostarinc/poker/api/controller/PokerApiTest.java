@@ -41,9 +41,9 @@ class PokerApiTest {
 	protected MockMvc endpoint;
 
 	protected ObjectMapper objectMapper() {
-		var om = new ObjectMapper();
-		om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		return om;
+		var value = new ObjectMapper();
+		value.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		return value;
 	}
 
 	@Test
