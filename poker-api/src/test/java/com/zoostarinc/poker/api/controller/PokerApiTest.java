@@ -1,6 +1,7 @@
 package com.zoostarinc.poker.api.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
@@ -50,8 +51,9 @@ class PokerApiTest {
 	void testEvaluateHighCard() throws Exception {
 		// given
 		String url = "/evaluate";
+		var card = new Card(Face.ACE, Suit.CLUB);
 		var cards = new ArrayList<Card>();
-		cards.add(new Card(Face.ACE, Suit.CLUB));
+		cards.add(card);
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
@@ -63,6 +65,13 @@ class PokerApiTest {
 		var value = om.readValue(response.getContentAsString(), PokerHandEvaluationResponse.class);
 		assertThat(value).isNotNull();
 		assertThat(value.getType()).isEqualTo(PokerHandType.HIGH_CARD);
+		var it = value.getCards().iterator();
+		if (it.hasNext()) {
+			var element = it.next();
+			assertThat(element).isEqualTo(card);
+		} else {
+			fail("Expecting at least 1 element!");
+		}
 	}
 
 	@Test
