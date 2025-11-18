@@ -13,6 +13,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
+		<sonar.token>${SONAR_TOKEN}</sonar.token>
 		<sonar.projectKey>zci_poker</sonar.projectKey>
 		<sonar.organization>zoostar-consulting-inc</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>

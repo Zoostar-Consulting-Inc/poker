@@ -1,13 +1,13 @@
 package com.zoostarinc.poker.api.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,6 +26,7 @@ import com.zoostarinc.poker.api.request.PokerHandComparisonRequest;
 import com.zoostarinc.poker.api.request.PokerHandEvaluationRequest;
 import com.zoostarinc.poker.api.response.PokerHandComparisonResponse;
 import com.zoostarinc.poker.api.response.PokerHandEvaluationResponse;
+import com.zoostarinc.poker.hand.PokerHand;
 import com.zoostarinc.poker.hand.PokerHandType;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,18 +43,18 @@ class PokerApiTest {
 	protected MockMvc endpoint;
 
 	protected ObjectMapper objectMapper() {
-		var om = new ObjectMapper();
-		om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		return om;
+		var value = new ObjectMapper();
+		value.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		return value;
 	}
 
 	@Test
-	@Disabled
 	void testEvaluateHighCard() throws Exception {
 		// given
 		String url = "/evaluate";
+		var card = new Card(Face.ACE, Suit.CLUB);
 		var cards = new ArrayList<Card>();
-		cards.add(new Card(Face.ACE, Suit.CLUB));
+		cards.add(card);
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
@@ -64,11 +65,22 @@ class PokerApiTest {
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		var value = om.readValue(response.getContentAsString(), PokerHandEvaluationResponse.class);
 		assertThat(value).isNotNull();
-		assertThat(value.getType()).isEqualTo(PokerHandType.HIGH_CARD);
+
+		var expectedHand = new PokerHand(PokerHandType.HIGH_CARD, cards);
+		var actualHand = new PokerHand(value.getType(), value.getCards());
+
+		assertThat(expectedHand).isEqualTo(actualHand).hasSameHashCodeAs(actualHand);
+		var it = value.getCards().iterator();
+		if (it.hasNext()) {
+			var element = it.next();
+			assertThat(element).isEqualTo(card).hasSameHashCodeAs(card);
+			assertThat(element).isNotEqualTo(new Card(Face.EIGHT, Suit.CLUB));
+		} else {
+			fail("Expecting at least 1 element!");
+		}
 	}
 
 	@Test
-	@Disabled
 	void testEvaluateOnePair() throws Exception {
 		// given
 		String url = "/evaluate";
@@ -90,7 +102,6 @@ class PokerApiTest {
 	}
 
 	@Test
-	@Disabled
 	void testEvaluateTwoPair() throws Exception {
 		// given
 		String url = "/evaluate";
@@ -98,7 +109,7 @@ class PokerApiTest {
 		cards.add(new Card(Face.ACE, Suit.CLUB));
 		cards.add(new Card(Face.SIX, Suit.HEART));
 		cards.add(new Card(Face.SIX, Suit.DIAMOND));
-		cards.add(new Card(Face.TEN, Suit.HEART));
+		cards.add(new Card(Face.TWO, Suit.HEART));
 		cards.add(new Card(Face.TWO, Suit.SPADE));
 		cards.add(new Card(Face.TEN, Suit.HEART));
 		cards.add(new Card(Face.TEN, Suit.DIAMOND));
@@ -116,7 +127,6 @@ class PokerApiTest {
 	}
 
 	@Test
-	@Disabled
 	void testEvaluateThreeOfAKind() throws Exception {
 		// given
 		String url = "/evaluate";
@@ -142,7 +152,6 @@ class PokerApiTest {
 	}
 
 	@Test
-	@Disabled
 	void testEvaluateStraight() throws Exception {
 		// given
 		String url = "/evaluate";

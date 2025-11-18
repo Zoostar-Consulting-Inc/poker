@@ -1,11 +1,11 @@
 package com.zoostarinc.poker.hand;
 
 import java.util.Collection;
+import java.util.Objects;
 
 import com.zoostarinc.card.Card;
 import com.zoostarinc.poker.core.PokerCardComparator;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Setter
 @ToString
-@EqualsAndHashCode
 @NoArgsConstructor
 public class PokerHand implements Comparable<PokerHand> {
 
@@ -55,6 +54,23 @@ public class PokerHand implements Comparable<PokerHand> {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cards, type);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof PokerHand)) {
+			return false;
+		}
+		PokerHand other = (PokerHand) obj;
+		return Objects.equals(cards, other.cards) && type == other.type;
 	}
 
 }
