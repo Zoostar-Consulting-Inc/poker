@@ -73,8 +73,8 @@ class PokerApiTest {
 		var it = value.getCards().iterator();
 		if (it.hasNext()) {
 			var element = it.next();
-			assertThat(element).isEqualTo(card);
-			assertThat(element).hasSameHashCodeAs(card);
+			assertThat(element).isEqualTo(card).hasSameHashCodeAs(card);
+			assertThat(element).isNotEqualTo(new Card(Face.EIGHT, Suit.CLUB));
 		} else {
 			fail("Expecting at least 1 element!");
 		}
