@@ -37,10 +37,7 @@ public class Card implements Comparable<Card> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (!(obj instanceof Card)) {
 			return false;
 		}
 		Card other = (Card) obj;

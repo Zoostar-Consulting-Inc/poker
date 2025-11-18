@@ -66,10 +66,7 @@ public class PokerHand implements Comparable<PokerHand> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (!(obj instanceof PokerHand)) {
 			return false;
 		}
 		PokerHand other = (PokerHand) obj;

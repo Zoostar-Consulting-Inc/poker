@@ -26,6 +26,7 @@ import com.zoostarinc.poker.api.request.PokerHandComparisonRequest;
 import com.zoostarinc.poker.api.request.PokerHandEvaluationRequest;
 import com.zoostarinc.poker.api.response.PokerHandComparisonResponse;
 import com.zoostarinc.poker.api.response.PokerHandEvaluationResponse;
+import com.zoostarinc.poker.hand.PokerHand;
 import com.zoostarinc.poker.hand.PokerHandType;
 
 import lombok.extern.slf4j.Slf4j;
@@ -64,11 +65,16 @@ class PokerApiTest {
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		var value = om.readValue(response.getContentAsString(), PokerHandEvaluationResponse.class);
 		assertThat(value).isNotNull();
-		assertThat(value.getType()).isEqualTo(PokerHandType.HIGH_CARD);
+
+		var expectedHand = new PokerHand(PokerHandType.HIGH_CARD, cards);
+		var actualHand = new PokerHand(value.getType(), value.getCards());
+
+		assertThat(expectedHand).isEqualTo(actualHand).hasSameHashCodeAs(actualHand);
 		var it = value.getCards().iterator();
 		if (it.hasNext()) {
 			var element = it.next();
 			assertThat(element).isEqualTo(card);
+			assertThat(element).hasSameHashCodeAs(card);
 		} else {
 			fail("Expecting at least 1 element!");
 		}
