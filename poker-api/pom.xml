@@ -10,7 +10,7 @@
 		<version>3.0.0-SNAPSHOT</version>
 	</parent>
 	<properties>
-		<sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.coverage.jacoco.xmlReportPaths>../${project.artifactId}/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -91,7 +91,6 @@
 						</goals>
 						<configuration>
 							<includeCurrentProject>true</includeCurrentProject>
-<!--							<outputDirectory>../target/site/jacoco-aggregate</outputDirectory>-->
 						</configuration>
 					</execution>
 					<execution>
@@ -114,6 +113,20 @@
 								</rule>
 							</rules>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>5.1.0.4751</version>
+				<executions>
+					<execution>
+						<id>sonar-scan</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sonar</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
