@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import lombok.Generated;
 
@@ -43,7 +44,7 @@ public class Main extends SpringBootServletInitializer implements WebMvcConfigur
 	OpenAPI openAPI() {
 		var version = new StringBuilder(buildVersion).append(".").append(buildName).append(".").append(buildTimestamp);
 		return new OpenAPI().info(new Info().title("Poker API").description("This API provides operations for Poker.")
-				.version(version.toString()));
+				.version(version.toString()).contact(new Contact().name("zoostar").email("devops@zoostar.net")));
 	}
 
 	@Override
