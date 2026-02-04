@@ -29,7 +29,7 @@ import net.zoostar.common.web.response.SuccessfulRequestLoggerResponseEntity;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-public class PokerApi {
+public class PokerRestController {
 
 	final ObjectMapper om;
 

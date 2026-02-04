@@ -2,6 +2,7 @@ package com.zoostarinc.poker.api.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.oidcLogin;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
@@ -9,16 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zoostarinc.card.Card;
 import com.zoostarinc.card.Face;
 import com.zoostarinc.card.Suit;
@@ -35,31 +32,22 @@ import net.zoostar.common.web.response.CommonErrorResponse;
 @Slf4j
 @SpringBootTest
 @AutoConfigureMockMvc
-class PokerApiTest {
-
-	protected ObjectMapper om = objectMapper();
-
-	@Autowired
-	protected MockMvc endpoint;
-
-	protected ObjectMapper objectMapper() {
-		var value = new ObjectMapper();
-		value.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		return value;
-	}
+class PokerRestControllerTest extends AbstractCommonTest {
 
 	@Test
 	void testEvaluateHighCard() throws Exception {
 		// given
-		String url = "/evaluate";
+		String url = "/api/evaluate";
 		var card = new Card(Face.ACE, Suit.CLUB);
 		var cards = new ArrayList<Card>();
 		cards.add(card);
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint.perform(post(url).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(om.writeValueAsString(request))).andReturn().getResponse();
+		var response = endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -83,7 +71,7 @@ class PokerApiTest {
 	@Test
 	void testEvaluateOnePair() throws Exception {
 		// given
-		String url = "/evaluate";
+		String url = "/api/evaluate";
 		var cards = new ArrayList<Card>();
 		cards.add(new Card(Face.ACE, Suit.CLUB));
 		cards.add(new Card(Face.TEN, Suit.HEART));
@@ -91,8 +79,10 @@ class PokerApiTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint.perform(post(url).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(om.writeValueAsString(request))).andReturn().getResponse();
+		var response = endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -104,7 +94,7 @@ class PokerApiTest {
 	@Test
 	void testEvaluateTwoPair() throws Exception {
 		// given
-		String url = "/evaluate";
+		String url = "/api/evaluate";
 		var cards = new ArrayList<Card>();
 		cards.add(new Card(Face.ACE, Suit.CLUB));
 		cards.add(new Card(Face.SIX, Suit.HEART));
@@ -116,8 +106,10 @@ class PokerApiTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint.perform(post(url).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(om.writeValueAsString(request))).andReturn().getResponse();
+		var response = endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -129,7 +121,7 @@ class PokerApiTest {
 	@Test
 	void testEvaluateThreeOfAKind() throws Exception {
 		// given
-		String url = "/evaluate";
+		String url = "/api/evaluate";
 		var cards = new ArrayList<Card>();
 		cards.add(new Card(Face.ACE, Suit.CLUB));
 		cards.add(new Card(Face.SIX, Suit.HEART));
@@ -141,8 +133,10 @@ class PokerApiTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint.perform(post(url).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(om.writeValueAsString(request))).andReturn().getResponse();
+		var response = endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -154,7 +148,7 @@ class PokerApiTest {
 	@Test
 	void testEvaluateStraight() throws Exception {
 		// given
-		String url = "/evaluate";
+		String url = "/api/evaluate";
 		var cards = new ArrayList<Card>();
 		cards.add(new Card(Face.SEVEN, Suit.CLUB));
 		cards.add(new Card(Face.FIVE, Suit.HEART));
@@ -166,8 +160,10 @@ class PokerApiTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint.perform(post(url).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(om.writeValueAsString(request))).andReturn().getResponse();
+		var response = endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -179,7 +175,7 @@ class PokerApiTest {
 	@Test
 	void testEvaluateFlush() throws Exception {
 		// given
-		String url = "/evaluate";
+		String url = "/api/evaluate";
 		var cards = new ArrayList<Card>();
 		cards.add(new Card(Face.SEVEN, Suit.HEART));
 		cards.add(new Card(Face.FIVE, Suit.HEART));
@@ -191,8 +187,10 @@ class PokerApiTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint.perform(post(url).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(om.writeValueAsString(request))).andReturn().getResponse();
+		var response = endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -204,7 +202,7 @@ class PokerApiTest {
 	@Test
 	void testEvaluateFullHouse() throws Exception {
 		// given
-		String url = "/evaluate";
+		String url = "/api/evaluate";
 		var cards = new ArrayList<Card>();
 		cards.add(new Card(Face.EIGHT, Suit.CLUB));
 		cards.add(new Card(Face.FIVE, Suit.HEART));
@@ -216,8 +214,10 @@ class PokerApiTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint.perform(post(url).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(om.writeValueAsString(request))).andReturn().getResponse();
+		var response = endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -229,7 +229,7 @@ class PokerApiTest {
 	@Test
 	void testEvaluateFourOfAKind() throws Exception {
 		// given
-		String url = "/evaluate";
+		String url = "/api/evaluate";
 		var cards = new ArrayList<Card>();
 		cards.add(new Card(Face.SIX, Suit.CLUB));
 		cards.add(new Card(Face.SIX, Suit.HEART));
@@ -241,8 +241,10 @@ class PokerApiTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint.perform(post(url).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(om.writeValueAsString(request))).andReturn().getResponse();
+		var response = endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -254,7 +256,7 @@ class PokerApiTest {
 	@Test
 	void testEvaluateStraightFlush() throws Exception {
 		// given
-		String url = "/evaluate";
+		String url = "/api/evaluate";
 		var cards = new ArrayList<Card>();
 		cards.add(new Card(Face.SEVEN, Suit.HEART));
 		cards.add(new Card(Face.FIVE, Suit.HEART));
@@ -266,8 +268,10 @@ class PokerApiTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint.perform(post(url).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(om.writeValueAsString(request))).andReturn().getResponse();
+		var response = endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -279,7 +283,7 @@ class PokerApiTest {
 	@Test
 	void testEvaluateRoyalFlush() throws Exception {
 		// given
-		String url = "/evaluate";
+		String url = "/api/evaluate";
 		var cards = new ArrayList<Card>();
 		cards.add(new Card(Face.SEVEN, Suit.HEART));
 		cards.add(new Card(Face.TEN, Suit.HEART));
@@ -291,8 +295,10 @@ class PokerApiTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint.perform(post(url).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(om.writeValueAsString(request))).andReturn().getResponse();
+		var response = endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -304,7 +310,7 @@ class PokerApiTest {
 	@Test
 	void testCompareGreaterThan() throws Exception {
 		// given
-		String url = "/compare";
+		String url = "/api/compare";
 		var cards1 = new ArrayList<Card>();
 		cards1.add(new Card(Face.SEVEN, Suit.HEART));
 
@@ -314,8 +320,10 @@ class PokerApiTest {
 		var request = new PokerHandComparisonRequest(cards1, cards2);
 
 		// when
-		var response = endpoint.perform(post(url).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(om.writeValueAsString(request))).andReturn().getResponse();
+		var response = endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -331,7 +339,7 @@ class PokerApiTest {
 	@Test
 	void testCompareLessThan() throws Exception {
 		// given
-		String url = "/compare";
+		String url = "/api/compare";
 		var cards1 = new ArrayList<Card>();
 		cards1.add(new Card(Face.FOUR, Suit.HEART));
 
@@ -341,8 +349,10 @@ class PokerApiTest {
 		var request = new PokerHandComparisonRequest(cards1, cards2);
 
 		// when
-		var response = endpoint.perform(post(url).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(om.writeValueAsString(request))).andReturn().getResponse();
+		var response = endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -358,7 +368,7 @@ class PokerApiTest {
 	@Test
 	void testCompareEqual() throws Exception {
 		// given
-		String url = "/compare";
+		String url = "/api/compare";
 		var cards1 = new ArrayList<Card>();
 		cards1.add(new Card(Face.SEVEN, Suit.HEART));
 
@@ -368,8 +378,10 @@ class PokerApiTest {
 		var request = new PokerHandComparisonRequest(cards1, cards2);
 
 		// when
-		var response = endpoint.perform(post(url).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(om.writeValueAsString(request))).andReturn().getResponse();
+		var response = endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -381,10 +393,12 @@ class PokerApiTest {
 	@Test
 	void testShuffle() throws Exception {
 		// given
-		String url = "/shuffle";
+		String url = "/api/shuffle";
 
 		// when
-		var response = endpoint.perform(get(url).contentType(MediaType.APPLICATION_JSON)).andReturn().getResponse();
+		var response = endpoint
+				.perform(get(url).contentType(MediaType.APPLICATION_JSON).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -396,7 +410,7 @@ class PokerApiTest {
 	@Test
 	void testInvalidNumberOfCards() throws Exception {
 		// given
-		String url = "/evaluate";
+		String url = "/api/evaluate";
 		var cards = new ArrayList<Card>();
 		cards.add(new Card(Face.SEVEN, Suit.HEART));
 		cards.add(new Card(Face.TEN, Suit.HEART));
@@ -408,8 +422,10 @@ class PokerApiTest {
 		cards.add(new Card(Face.ACE, Suit.SPADE));
 
 		var request = new PokerHandEvaluationRequest(cards);
-		var response = endpoint.perform(post(url).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON).content(om.writeValueAsString(request))).andReturn().getResponse();
+		var response = endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
 		var value = om.readValue(response.getContentAsString(), CommonErrorResponse.class);
 		assertThat(value.getMessage()).isEqualTo("Expected minimum of 1 and maximum of 7 cards only!");
