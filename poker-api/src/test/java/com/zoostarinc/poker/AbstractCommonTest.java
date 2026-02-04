@@ -1,4 +1,4 @@
-package com.zoostarinc.poker.api.controller;
+package com.zoostarinc.poker;
 
 import java.time.Instant;
 import java.util.Collections;
@@ -20,9 +20,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public abstract class AbstractCommonTest {
 
 	@Autowired
-	MockMvc endpoint;
+	protected MockMvc endpoint;
 
-	ObjectMapper om = objectMapper();
+	protected ObjectMapper om = objectMapper();
 
 	protected ObjectMapper objectMapper() {
 		var value = new ObjectMapper();

@@ -19,6 +19,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.zoostarinc.card.Card;
 import com.zoostarinc.card.Face;
 import com.zoostarinc.card.Suit;
+import com.zoostarinc.poker.AbstractCommonTest;
 import com.zoostarinc.poker.api.request.PokerHandComparisonRequest;
 import com.zoostarinc.poker.api.request.PokerHandEvaluationRequest;
 import com.zoostarinc.poker.api.response.PokerHandComparisonResponse;
