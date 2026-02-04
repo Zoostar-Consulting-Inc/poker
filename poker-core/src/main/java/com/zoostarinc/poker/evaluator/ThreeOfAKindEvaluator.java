@@ -18,7 +18,7 @@ public class ThreeOfAKindEvaluator implements PokerHandEvaluator {
 		Card previous = null;
 		Card current = null;
 		var it = cards.iterator();
-		Collection<Card> threeOfAKind = new ArrayList<>(DefaultPokerHandEvaluatorChain.MAX_CARDS);
+		Collection<Card> threeOfAKind = new ArrayList<>(DefaultPokerHandEvaluatorChain.MAX_CARDS_IN_A_HAND);
 		while (threeOfAKind.size() < 2 && it.hasNext()) {
 			current = it.next();
 			if (previous != null && previous.getFace() == current.getFace()) {

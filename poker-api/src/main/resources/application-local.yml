@@ -1,12 +1,4 @@
-# --- Spring Boot specific properties ---
-server:
-  compression:
-    enabled: true
-    mime-types: application/json,application/xml,text/html,text/xml,text/plain
-    min-response-size: 2048
-# --- xxx ---
-
-# --- Application specific properties per environment ---
+# --- Spring Boot specific properties for local ---
 logging:
   level:
     root: info
@@ -16,4 +8,9 @@ logging:
 logs:
   base:
     dir: logs
-# --- xxx ---
+
+server:
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+    min-response-size: 2048

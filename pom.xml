@@ -9,10 +9,12 @@
 	<parent>
 		<groupId>net.zoostar.boot</groupId>
 		<artifactId>zoostar-boot-starter-parent</artifactId>
-		<version>3.1.0</version>
+		<version>3.3.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
+		<build.number>${user.name}</build.number>
+		<build.timestamp>${maven.build.timestamp}</build.timestamp>
 		<sonar.token>${SONAR_TOKEN}</sonar.token>
 		<sonar.projectKey>zci_poker</sonar.projectKey>
 		<sonar.organization>zoostar-consulting-inc</sonar.organization>
@@ -22,11 +24,13 @@
 		<module>poker-api</module>
 		<module>poker-core</module>
 	</modules>
-	<dependencies>
-		<dependency>
-			<groupId>net.zoostar.common</groupId>
-			<artifactId>zoostar-common</artifactId>
-			<version>3.1.0</version>
-		</dependency>
-	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>net.zoostar.common</groupId>
+				<artifactId>zoostar-common</artifactId>
+				<version>3.3.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
