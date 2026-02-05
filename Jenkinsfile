@@ -27,7 +27,7 @@ pipeline {
 				script {
 					if("closed" == "$action" &&
 							("test" == "$target" || "develop" == "$target")) {
-						bat 'mvn -B clean deploy -Duser.name="%BUILD_NUMBER%" -Dmaven.tomcat.skip="install"'
+						bat 'mvn -B clean deploy -Duser.name="%BUILD_NUMBER%" -Dmaven.test.skip="true" -Dmaven.tomcat.skip="install"'
 					}
 				}
 			}

@@ -16,7 +16,7 @@ public class FourOfAKindEvaluator implements PokerHandEvaluator {
 		Card previous = null;
 		Card current = null;
 		var it = cards.iterator();
-		Collection<Card> fourOfAKind = new ArrayList<>(DefaultPokerHandEvaluatorChain.MAX_CARDS);
+		Collection<Card> fourOfAKind = new ArrayList<>(DefaultPokerHandEvaluatorChain.MAX_CARDS_IN_A_HAND);
 		while (fourOfAKind.size() < 3 && it.hasNext()) {
 			current = it.next();
 			if (previous != null && previous.getFace() == current.getFace()) {

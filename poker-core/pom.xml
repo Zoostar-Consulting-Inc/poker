@@ -8,4 +8,10 @@
 		<version>3.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>poker-core</artifactId>
+	<dependencies>
+		<dependency>
+			<groupId>net.zoostar.common</groupId>
+			<artifactId>zoostar-common</artifactId>
+		</dependency>
+	</dependencies>
 </project>

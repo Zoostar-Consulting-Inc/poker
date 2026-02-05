@@ -30,10 +30,12 @@ public final class Utils {
 	public static SortedSet<Card> getStraightCards(SortedSet<Card> cards) {
 		Card previous = null;
 		Card current = null;
+		Card ace = null;
+
+		// Handle first 4 cards.
 		int result = -1;
 		SortedSet<Card> straight = new TreeSet<>();
 		var it = cards.iterator();
-		Card ace = null;
 		while (straight.size() < 4 && it.hasNext()) {
 			current = it.next();
 			if (current.getFace() == Face.ACE) {
@@ -47,10 +49,12 @@ public final class Utils {
 			previous = current;
 		}
 
+		// Handle the fifth card.
 		if (result == CONSECUTIVE && straight.size() < 5) {
 			straight.add(current);
 		}
 
+		// Handle Ace card, if present.
 		if (ace != null && current.getFace() == Face.TWO && straight.size() >= 4) {
 			straight.add(ace);
 		}

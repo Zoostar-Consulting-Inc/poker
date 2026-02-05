@@ -1,3 +1,4 @@
+# --- Application specific properties per environment ---
 build:
   name: '@build.number@'
   version: '@project.version@'
@@ -6,4 +7,15 @@ build:
 spring:
   profiles:
     active:
-      - local #spring boot profile
+      - local # Load spring boot profile by default
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 1080880909532-ah9opvtako4kavm3o8gfr91vumipbc8a.apps.googleusercontent.com
+            clientSecret: ${client.secret.poker.google}
+            scope:
+              - openid
+              - profile
+              - email

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,7 +28,8 @@ import net.zoostar.common.web.response.SuccessfulRequestLoggerResponseEntity;
 @Timeable
 @RestController
 @RequiredArgsConstructor
-public class PokerApi {
+@RequestMapping("/api")
+public class PokerRestController {
 
 	final ObjectMapper om;
 
