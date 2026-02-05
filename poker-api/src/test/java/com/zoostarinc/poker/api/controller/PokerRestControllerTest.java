@@ -2,6 +2,7 @@ package com.zoostarinc.poker.api.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.oidcLogin;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -47,7 +48,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		// when
 		var response = endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
 				.andReturn().getResponse();
 
 		// then
@@ -82,7 +83,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		// when
 		var response = endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
 				.andReturn().getResponse();
 
 		// then
@@ -109,7 +110,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		// when
 		var response = endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
 				.andReturn().getResponse();
 
 		// then
@@ -136,7 +137,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		// when
 		var response = endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
 				.andReturn().getResponse();
 
 		// then
@@ -163,7 +164,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		// when
 		var response = endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
 				.andReturn().getResponse();
 
 		// then
@@ -190,7 +191,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		// when
 		var response = endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
 				.andReturn().getResponse();
 
 		// then
@@ -217,7 +218,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		// when
 		var response = endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
 				.andReturn().getResponse();
 
 		// then
@@ -244,7 +245,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		// when
 		var response = endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
 				.andReturn().getResponse();
 
 		// then
@@ -271,7 +272,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		// when
 		var response = endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
 				.andReturn().getResponse();
 
 		// then
@@ -298,7 +299,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		// when
 		var response = endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
 				.andReturn().getResponse();
 
 		// then
@@ -323,7 +324,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		// when
 		var response = endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
 				.andReturn().getResponse();
 
 		// then
@@ -352,7 +353,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		// when
 		var response = endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
 				.andReturn().getResponse();
 
 		// then
@@ -381,7 +382,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		// when
 		var response = endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
 				.andReturn().getResponse();
 
 		// then
@@ -425,7 +426,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		var request = new PokerHandEvaluationRequest(cards);
 		var response = endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
 				.andReturn().getResponse();
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
 		var value = om.readValue(response.getContentAsString(), CommonErrorResponse.class);
