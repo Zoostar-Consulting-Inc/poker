@@ -34,8 +34,7 @@ public class ApplicationContext {
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
-		return security.csrf(csrf -> csrf.disable())
-				.authorizeHttpRequests(authorize -> authorize
+		return security.authorizeHttpRequests(authorize -> authorize
 				// Allow Swagger UI resources (CSS, JS, HTML, images)
 				.requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/webjars/**").permitAll()
 				// Allow static resources if you have any served directly
