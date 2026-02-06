@@ -1,4 +1,4 @@
-# poker
+# Poker API
 
 <p>Minimum Environment Requirements:<br/>
 
@@ -8,3 +8,5 @@
 <li>Apache Tomcat: 10.1.41</li>
 <li>Spring Boot: 3.4.6</li>
 </ul>
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=zci_poker&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=zci_poker)
