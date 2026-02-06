@@ -2,10 +2,6 @@ package com.zoostarinc.poker.api.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.oidcLogin;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.zoostarinc.card.Card;
@@ -46,10 +41,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint
-				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
-				.andReturn().getResponse();
+		var response = postJsonRequest(url, request);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -81,10 +73,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint
-				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
-				.andReturn().getResponse();
+		var response = postJsonRequest(url, request);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -108,10 +97,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint
-				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
-				.andReturn().getResponse();
+		var response = postJsonRequest(url, request);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -135,10 +121,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint
-				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
-				.andReturn().getResponse();
+		var response = postJsonRequest(url, request);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -162,10 +145,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint
-				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
-				.andReturn().getResponse();
+		var response = postJsonRequest(url, request);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -189,10 +169,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint
-				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
-				.andReturn().getResponse();
+		var response = postJsonRequest(url, request);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -216,10 +193,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint
-				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
-				.andReturn().getResponse();
+		var response = postJsonRequest(url, request);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -243,10 +217,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint
-				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
-				.andReturn().getResponse();
+		var response = postJsonRequest(url, request);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -270,10 +241,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint
-				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
-				.andReturn().getResponse();
+		var response = postJsonRequest(url, request);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -297,10 +265,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		var request = new PokerHandEvaluationRequest(cards);
 
 		// when
-		var response = endpoint
-				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
-				.andReturn().getResponse();
+		var response = postJsonRequest(url, request);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -322,10 +287,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		var request = new PokerHandComparisonRequest(cards1, cards2);
 
 		// when
-		var response = endpoint
-				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
-				.andReturn().getResponse();
+		var response = postJsonRequest(url, request);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -351,10 +313,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		var request = new PokerHandComparisonRequest(cards1, cards2);
 
 		// when
-		var response = endpoint
-				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
-				.andReturn().getResponse();
+		var response = postJsonRequest(url, request);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -380,10 +339,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		var request = new PokerHandComparisonRequest(cards1, cards2);
 
 		// when
-		var response = endpoint
-				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
-				.andReturn().getResponse();
+		var response = postJsonRequest(url, request);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -398,9 +354,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		String url = "/api/shuffle";
 
 		// when
-		var response = endpoint
-				.perform(get(url).contentType(MediaType.APPLICATION_JSON).with(oidcLogin().oidcUser(oidcUser())))
-				.andReturn().getResponse();
+		var response = getBody(url);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
@@ -424,13 +378,51 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		cards.add(new Card(Face.ACE, Suit.SPADE));
 
 		var request = new PokerHandEvaluationRequest(cards);
-		var response = endpoint
-				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
-				.andReturn().getResponse();
+
+		// when
+		var response = postJsonRequest(url, request);
+
+		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
 		var value = om.readValue(response.getContentAsString(), CommonErrorResponse.class);
 		assertThat(value.getMessage()).isEqualTo("Expected minimum of 1 and maximum of 7 cards only!");
+	}
+
+	@Test
+	void testComparePokerHands() throws Exception {
+		// given
+		String url = "/api/compare";
+
+		var cardsFlush = new ArrayList<Card>();
+		cardsFlush.add(new Card(Face.SEVEN, Suit.HEART));
+		cardsFlush.add(new Card(Face.FIVE, Suit.HEART));
+		cardsFlush.add(new Card(Face.SIX, Suit.DIAMOND));
+		cardsFlush.add(new Card(Face.TEN, Suit.HEART));
+		cardsFlush.add(new Card(Face.SIX, Suit.HEART));
+		cardsFlush.add(new Card(Face.FOUR, Suit.HEART));
+		cardsFlush.add(new Card(Face.EIGHT, Suit.DIAMOND));
+
+		var cardsFullHouse = new ArrayList<Card>();
+		cardsFullHouse.add(new Card(Face.EIGHT, Suit.CLUB));
+		cardsFullHouse.add(new Card(Face.FIVE, Suit.HEART));
+		cardsFullHouse.add(new Card(Face.SIX, Suit.DIAMOND));
+		cardsFullHouse.add(new Card(Face.EIGHT, Suit.HEART));
+		cardsFullHouse.add(new Card(Face.SIX, Suit.SPADE));
+		cardsFullHouse.add(new Card(Face.FOUR, Suit.HEART));
+		cardsFullHouse.add(new Card(Face.EIGHT, Suit.DIAMOND));
+		var response = postJsonRequest("/api/evaluate", new PokerHandEvaluationRequest(cardsFullHouse));
+		var fullHouse = om.readValue(response.getContentAsString(), PokerHandEvaluationResponse.class);
+
+		// when
+		response = postJsonRequest(url, new PokerHandComparisonRequest(cardsFullHouse, cardsFlush));
+
+		// then
+		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+		var value = om.readValue(response.getContentAsString(), PokerHandComparisonResponse.class);
+		assertThat(value.getHands().size()).isEqualTo(1);
+		for (var hand : value.getHands()) {
+			assertThat(hand.getType()).isEqualTo(fullHouse.getType());
+		}
 	}
 
 }
