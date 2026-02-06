@@ -37,7 +37,7 @@ public class SwaggerController implements ApplicationContextAware {
 		log.debug("Session ID: {}", session.getId());
 
 		var principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		log.info("Logged in Principal: {}", principal.toString());
+		log.debug("Logged in Principal: {}", principal.toString());
 		var name = user == null ? "Guest" : user.getGivenName();
 		log.info("Hello {}!", name);
 

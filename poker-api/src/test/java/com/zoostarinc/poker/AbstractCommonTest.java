@@ -1,11 +1,18 @@
 package com.zoostarinc.poker;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.oidcLogin;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
 import java.time.Instant;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
@@ -28,6 +35,18 @@ public abstract class AbstractCommonTest {
 		var value = new ObjectMapper();
 		value.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		return value;
+	}
+
+	protected MockHttpServletResponse getBody(String url) throws Exception {
+		return endpoint.perform(get(url).contentType(MediaType.APPLICATION_JSON).with(oidcLogin().oidcUser(oidcUser())))
+				.andReturn().getResponse();
+	}
+
+	protected <T> MockHttpServletResponse postJsonRequest(String url, T request) throws Exception {
+		return endpoint
+				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
+				.andReturn().getResponse();
 	}
 
 	protected OidcUser oidcUser() {

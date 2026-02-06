@@ -1,8 +1,6 @@
 package com.zoostarinc.poker.web.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.oidcLogin;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,7 +19,7 @@ class SwaggerControllerTest extends AbstractCommonTest {
 		String url = "/";
 
 		// when
-		var response = endpoint.perform(get(url).with(oidcLogin().oidcUser(oidcUser()))).andReturn().getResponse();
+		var response = getBody(url);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.FOUND.value());
