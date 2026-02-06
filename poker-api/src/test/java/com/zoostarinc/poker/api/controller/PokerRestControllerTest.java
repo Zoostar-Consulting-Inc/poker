@@ -419,7 +419,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		var value = om.readValue(response.getContentAsString(), PokerHandComparisonResponse.class);
-		assertThat(value.getHands().size()).isEqualTo(1);
+		assertThat(value.getHands()).hasSize(1);
 		for (var hand : value.getHands()) {
 			assertThat(hand.getType()).isEqualTo(fullHouse.getType());
 		}

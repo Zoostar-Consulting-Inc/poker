@@ -3,8 +3,6 @@ logging:
     root: warn
     '[net.zoostar]': info
     '[com.zoostarinc]': info
-  pattern:
-    console: "%black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable"
 
 server:
   forward-headers-strategy: framework
