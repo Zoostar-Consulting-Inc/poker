@@ -1,5 +1,4 @@
-# Poker API
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=zci_poker&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=zci_poker)
+# Poker API [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=zci_poker&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=zci_poker)
 
 <p>Minimum Environment Requirements:<br/>
 
