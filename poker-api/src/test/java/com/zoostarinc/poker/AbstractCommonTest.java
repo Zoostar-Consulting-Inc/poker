@@ -1,6 +1,5 @@
 package com.zoostarinc.poker;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.oidcLogin;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -45,7 +44,7 @@ public abstract class AbstractCommonTest {
 	protected <T> MockHttpServletResponse postJsonRequest(String url, T request) throws Exception {
 		return endpoint
 				.perform(post(url).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
-						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())).with(csrf()))
+						.content(om.writeValueAsString(request)).with(oidcLogin().oidcUser(oidcUser())))
 				.andReturn().getResponse();
 	}
 
