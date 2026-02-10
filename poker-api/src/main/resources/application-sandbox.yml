@@ -6,5 +6,3 @@ logging:
     '[com.zoostarinc]': trace
     '[org.springframework.security]': debug
     '[org.springframework.transaction]': trace
-  pattern:
-    console: "%black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable"
