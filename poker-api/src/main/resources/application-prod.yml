@@ -1,8 +1,8 @@
 logging:
   level:
     root: warn
-    '[net.zoostar]': debug
-    '[com.zoostarinc]': debug
+    '[net.zoostar]': info
+    '[com.zoostarinc]': info
 
 server:
   forward-headers-strategy: framework
