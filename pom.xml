@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.zoostarinc.poker</groupId>
 	<artifactId>poker-parent</artifactId>
-	<version>3.0.1-SNAPSHOT</version>
+	<version>3.4.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<parent>
 		<groupId>net.zoostar.boot</groupId>
 		<artifactId>zoostar-boot-starter-parent</artifactId>
-		<version>3.6.0</version>
+		<version>3.3.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
@@ -22,13 +22,15 @@
 	</properties>
 	<modules>
 		<module>poker-api</module>
-		<module>poker-spi</module>
 		<module>poker-core</module>
 	</modules>
-	<dependencies>
-		<dependency>
-			<groupId>net.zoostar.common</groupId>
-			<artifactId>zoostar-common</artifactId>
-		</dependency>
-	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>net.zoostar.common</groupId>
+				<artifactId>zoostar-common</artifactId>
+				<version>3.3.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
