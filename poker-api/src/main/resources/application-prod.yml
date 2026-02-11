@@ -1,3 +1,7 @@
+logs:
+  base:
+    dir: logs
+
 logging:
   level:
     root: warn
