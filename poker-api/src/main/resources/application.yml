@@ -1,4 +1,6 @@
 # --- Application specific properties per environment ---
+# Adjust logging levels in file logback-spring.xml
+ 
 build:
   name: '@build.number@'
   version: '@project.version@'
