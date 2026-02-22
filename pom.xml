@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>net.zoostar.boot</groupId>
 		<artifactId>zoostar-boot-starter-parent</artifactId>
-		<version>3.4.0</version>
+		<version>3.4.1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
@@ -24,13 +24,4 @@
 		<module>poker-api</module>
 		<module>poker-core</module>
 	</modules>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>net.zoostar.common</groupId>
-				<artifactId>zoostar-common</artifactId>
-				<version>3.3.0</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 </project>
