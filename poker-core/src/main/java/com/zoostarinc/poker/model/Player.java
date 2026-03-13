@@ -1,6 +1,6 @@
 package com.zoostarinc.poker.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ public class Player {
 
 	private String email;
 	
-	private Date previousLogin;
+	private LocalDateTime previousLogin;
 	
 	public Player(String email) {
 		this.email = email;

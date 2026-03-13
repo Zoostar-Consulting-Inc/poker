@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>net.zoostar.boot</groupId>
 		<artifactId>zoostar-boot-starter-parent</artifactId>
-		<version>3.5.3</version>
+		<version>3.6.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
@@ -25,6 +25,17 @@
 		<module>poker-spi</module>
 		<module>poker-core</module>
 	</modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.mongodb</groupId>
+				<artifactId>mongodb-driver-bom</artifactId>
+				<version>5.6.4</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>net.zoostar.common</groupId>
