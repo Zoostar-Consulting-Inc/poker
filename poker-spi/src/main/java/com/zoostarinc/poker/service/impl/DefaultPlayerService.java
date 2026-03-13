@@ -1,5 +1,6 @@
 package com.zoostarinc.poker.service.impl;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,24 +23,19 @@ public class DefaultPlayerService implements PlayerService {
 	private final PlayerRepository playerRepository;
 	
 	@Override
+	@Cacheable("playerManager.create")
 	public Player create(Transformer<PlayerEntity> transformer) {
-		Player model = null;
-		var entity = transformer.transform();
-		try {
-			model = retrieve(entity.getEmail());
-			log.info("Found user: {}", model);
-		} catch(IllegalArgumentException e) {
-			entity = playerRepository.save(entity);
-			log.info("Created new player entity: {}", entity);
-			model = new Player(entity.getEmail());
-			model.setPreviousLogin(entity.getPreviousLogin());
-		}
+		var entity = playerRepository.save(transformer.transform());
+		log.info("Created new player: {}", entity);
+		var model = new Player(entity.getEmail());
+		model.setPreviousLogin(entity.getPreviousLogin());
 		return model;
 	}
 
 	@Override
+	@Cacheable("playerManager.retrieveByEmail")
 	@Transactional(readOnly = true)
-	public Player retrieve(String email) {
+	public Player retrieveByEmail(String email) {
 		Utils.assertNotEmpty(email, "Required field <email> may not be empty!");
 		
 		var entity = playerRepository.findByEmail(email);
@@ -47,7 +43,7 @@ public class DefaultPlayerService implements PlayerService {
 			throw new IllegalArgumentException(String.format("No Player found for email %s", email));
 		}
 		
-		log.info("Found player entity: {}", entity);
+		log.info("Found existing player: {}", entity);
 		var player = entity.get();
 		Player model = new Player(player.getEmail());
 		model.setPreviousLogin(player.getPreviousLogin());

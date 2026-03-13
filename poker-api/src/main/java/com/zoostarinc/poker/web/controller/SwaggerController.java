@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.zoostarinc.poker.model.Player;
 import com.zoostarinc.poker.service.PlayerService;
 import com.zoostarinc.poker.transformer.impl.OidcUserTransformer;
 
@@ -21,9 +22,11 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.zoostar.common.Utils;
+import net.zoostar.common.audit.Timeable;
 
 @Slf4j
 @Controller
+@Timeable(threshold = 500)
 @RequiredArgsConstructor
 public class SwaggerController implements ApplicationContextAware {
 
@@ -51,10 +54,20 @@ public class SwaggerController implements ApplicationContextAware {
 		model.addAttribute("name", name);
 		model.addAttribute("currentTime", OffsetDateTime.now().format(Utils.ISO_DATE_TIME_FORMAT_UPTO_SECONDS));
 		
-		var player = playerManager.create(new OidcUserTransformer(user));
+		var player = getPlayer(user);
 		log.info("Welcome Player: {}", player);
 		
 		return page;
+	}
+	
+	protected Player getPlayer(OidcUser user) {
+		Player model = null;
+		try {
+			model = playerManager.retrieveByEmail(user.getEmail());
+		} catch(IllegalArgumentException e) {
+			model = playerManager.create(new OidcUserTransformer(user));
+		}
+		return model;
 	}
 
 }

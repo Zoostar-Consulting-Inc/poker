@@ -7,5 +7,5 @@ import net.zoostar.common.transform.Transformer;
 
 public interface PlayerService {
 	Player create(Transformer<PlayerEntity> transformer);
-	Player retrieve(String email);
+	Player retrieveByEmail(String email);
 }

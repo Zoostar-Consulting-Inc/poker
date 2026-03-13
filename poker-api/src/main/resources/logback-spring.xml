@@ -35,4 +35,9 @@
 		<appender-ref ref="AppRollingFile" />
 	</root>
 
+	<logger level="trace" additivity="false"
+		name="org.springframework.cache">
+		<appender-ref ref="Console" />
+	</logger>
+
 </configuration>
