@@ -40,4 +40,14 @@
 		<appender-ref ref="Console" />
 	</logger>
 
+	<logger level="trace" additivity="false"
+		name="net.zoostar">
+		<appender-ref ref="Console" />
+	</logger>
+
+	<logger level="trace" additivity="false"
+		name="com.zoostarinc">
+		<appender-ref ref="Console" />
+	</logger>
+
 </configuration>

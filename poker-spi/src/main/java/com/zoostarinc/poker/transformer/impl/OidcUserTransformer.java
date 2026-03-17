@@ -1,7 +1,5 @@
 package com.zoostarinc.poker.transformer.impl;
 
-import java.time.LocalDateTime;
-
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.util.StringUtils;
 
@@ -29,7 +27,7 @@ public class OidcUserTransformer implements Transformer<PlayerEntity> {
 		
 		var entity = new PlayerEntity();
 		entity.setEmail(user.getEmail());
-		entity.setPreviousLogin(LocalDateTime.now());
+//		entity.setPreviousLogin(LocalDateTime.now());
 		log.info("Transformed OidcUser to Player entity: {}", entity);
 		return entity;
 	}

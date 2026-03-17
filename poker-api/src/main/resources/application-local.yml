@@ -12,18 +12,5 @@ server:
 
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
     password: ${poker.datasource.password}
     url: jdbc:h2:mem:poker
-    username: spring-boot-local
-  jpa:
-    defer-datasource-initialization: true
-    open-in-view: false
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-  sql:
-    init:
-      mode: always
-      platform: h2
-      schema-locations: classpath*:schema-h2.sql
