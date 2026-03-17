@@ -25,6 +25,7 @@ public class PlayerEntity implements Persistable<UUID> {
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
 	
+	@Column(length = 50, nullable = false, unique = true)
 	private String email;
 	
 	@Column(name = "PREVIOUS_LOGIN")
