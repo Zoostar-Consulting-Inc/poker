@@ -354,7 +354,7 @@ class PokerRestControllerTest extends AbstractCommonTest {
 		String url = "/api/shuffle";
 
 		// when
-		var response = getBody(url);
+		var response = getResponse(url);
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());

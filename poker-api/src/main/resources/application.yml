@@ -1,4 +1,6 @@
 # --- Application specific properties per environment ---
+# Adjust logging levels in file logback-spring.xml
+ 
 build:
   name: '@build.number@'
   version: '@project.version@'
@@ -8,6 +10,20 @@ spring:
   profiles:
     active:
       - local # Load spring boot profile by default
+  datasource:
+    driver-class-name: org.h2.Driver
+    username: poker
+  jpa:
+    defer-datasource-initialization: true
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  sql:
+    init:
+      mode: always
+      platform: h2
+      schema-locations: classpath*:schema-h2.sql
   security:
     oauth2:
       client:

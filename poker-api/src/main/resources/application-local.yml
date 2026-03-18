@@ -1,9 +1,4 @@
 # --- Spring Boot specific properties for local ---
-logging:
-  level:
-    root: info
-    '[net.zoostar]': trace
-    '[com.zoostarinc]': trace
 
 logs:
   base:
@@ -14,3 +9,8 @@ server:
     enabled: true
     mime-types: application/json,application/xml,text/html,text/xml,text/plain
     min-response-size: 2048
+
+spring:
+  datasource:
+    password: ${poker.datasource.password}
+    url: jdbc:h2:mem:poker
