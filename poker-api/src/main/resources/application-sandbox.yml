@@ -1,5 +1,4 @@
 # --- Spring Boot specific properties for sandbox ---
-
 logging:
   file:
     path: logs
