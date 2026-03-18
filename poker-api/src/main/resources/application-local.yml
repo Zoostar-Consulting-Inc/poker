@@ -3,7 +3,7 @@ logging:
   file:
     path: logs
   level:
-    root: debug
+    root: info
     '[net.zoostar]': trace
     '[com.zoostarinc]': trace
 
