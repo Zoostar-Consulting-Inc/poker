@@ -1,14 +1,9 @@
 package com.zoostarinc.poker.web.controller;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.http.MediaType;
@@ -31,15 +26,13 @@ import net.zoostar.common.audit.Timeable;
 @Controller
 @Timeable(threshold = 500)
 @RequiredArgsConstructor
-public class SwaggerController implements ApplicationContextAware, DisposableBean {
+public class SwaggerController implements ApplicationContextAware {
 	
 	public static final String SWAGGER_PAGE = "redirect:swagger-ui/index.html";
 
 	protected ApplicationContext applicationContext;
 	
 	protected final PokerService pokerManager;
-	
-	private final DataSource dataSource;
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -66,24 +59,6 @@ public class SwaggerController implements ApplicationContextAware, DisposableBea
 		pokerManager.updateLoginTime(player.getEmail());
 		
 		return SWAGGER_PAGE;
-	}
-
-	@Override
-	public void destroy() throws Exception {
-		closeDataSource(dataSource);
-	}
-
-	public static void closeDataSource(DataSource dataSource) {
-		if(dataSource != null) {
-			Connection conn;
-			try {
-				conn = dataSource.getConnection();
-				log.info("Performing a clean shutdown of connection: {}...", conn);
-				conn.close();
-			} catch (SQLException e) {
-				log.error(e.getMessage(), e);
-			}
-		}
 	}
 	
 }
