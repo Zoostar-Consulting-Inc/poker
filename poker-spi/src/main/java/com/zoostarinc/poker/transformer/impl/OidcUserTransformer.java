@@ -1,7 +1,6 @@
 package com.zoostarinc.poker.transformer.impl;
 
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.springframework.util.StringUtils;
 
 import com.zoostarinc.poker.dao.entity.PlayerEntity;
 
@@ -21,10 +20,6 @@ public class OidcUserTransformer implements Transformer<PlayerEntity> {
 	
 	@Override
 	public PlayerEntity transform() {
-		if(user == null || !StringUtils.hasText(user.getEmail())) {
-			throw new IllegalArgumentException("User email is required!");
-		}
-		
 		var entity = new PlayerEntity();
 		entity.setEmail(user.getEmail());
 		log.info("Transformed OidcUser to Player entity: {}", entity);
