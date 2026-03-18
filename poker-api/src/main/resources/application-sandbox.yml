@@ -1,17 +1,9 @@
 # --- Spring Boot specific properties for sandbox ---
 
-logs:
-  base:
-    dir: logs
-
 logging:
   level:
     '[net.zoostar]': trace
     '[com.zoostarinc]': trace
-
-logs:
-  base:
-    dir: logs
 
 spring:
   datasource:
