@@ -2,6 +2,7 @@
 logging:
   file:
     path: logs
+    name: "@project.build.finalName@"
   level:
     root: info
     '[net.zoostar]': trace
