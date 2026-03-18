@@ -22,6 +22,7 @@
 	</properties>
 	<modules>
 		<module>poker-api</module>
+		<module>poker-spi</module>
 		<module>poker-core</module>
 	</modules>
 	<dependencyManagement>
