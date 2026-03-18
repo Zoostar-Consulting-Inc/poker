@@ -36,7 +36,11 @@ public abstract class AbstractCommonTest {
 		return value;
 	}
 
-	protected MockHttpServletResponse getBody(String url) throws Exception {
+	protected MockHttpServletResponse getResponse(String url) throws Exception {
+		return endpoint.perform(get(url).with(oidcLogin().oidcUser(oidcUser()))).andReturn().getResponse();
+	}
+
+	protected MockHttpServletResponse getJsonResponse(String url) throws Exception {
 		return endpoint.perform(get(url).contentType(MediaType.APPLICATION_JSON).with(oidcLogin().oidcUser(oidcUser())))
 				.andReturn().getResponse();
 	}

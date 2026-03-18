@@ -22,12 +22,11 @@ public class OidcUserTransformer implements Transformer<PlayerEntity> {
 	@Override
 	public PlayerEntity transform() {
 		if(user == null || !StringUtils.hasText(user.getEmail())) {
-			throw new IllegalArgumentException("User email is requesred!");
+			throw new IllegalArgumentException("User email is required!");
 		}
 		
 		var entity = new PlayerEntity();
 		entity.setEmail(user.getEmail());
-//		entity.setPreviousLogin(LocalDateTime.now());
 		log.info("Transformed OidcUser to Player entity: {}", entity);
 		return entity;
 	}

@@ -1,7 +1,6 @@
 package com.zoostarinc.poker.dao.entity;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 import java.util.UUID;
 
 import org.springframework.data.domain.Persistable;
@@ -11,13 +10,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity(name = "PLAYER")
 public class PlayerEntity implements Persistable<UUID> {
 
@@ -25,6 +28,7 @@ public class PlayerEntity implements Persistable<UUID> {
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
 	
+	@EqualsAndHashCode.Include
 	@Column(length = 50, nullable = false, unique = true)
 	private String email;
 	
@@ -33,24 +37,8 @@ public class PlayerEntity implements Persistable<UUID> {
 
 	@Override
 	public boolean isNew() {
+		log.info("{} is new?", this);
 		return id == null;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(email);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof PlayerEntity)) {
-			return false;
-		}
-		PlayerEntity other = (PlayerEntity) obj;
-		return Objects.equals(email, other.email);
 	}
 
 }
