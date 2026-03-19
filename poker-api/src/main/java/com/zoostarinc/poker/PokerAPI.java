@@ -4,14 +4,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import lombok.Generated;
 
 @Generated
+@EnableCaching
 @SpringBootApplication
+@EnableJpaRepositories
 @EnableAspectJAutoProxy
 @ComponentScan(basePackages = { "net.zoostar", "com.zoostarinc" })
 public class PokerAPI extends SpringBootServletInitializer implements WebMvcConfigurer {
