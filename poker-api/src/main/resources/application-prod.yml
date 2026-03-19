@@ -1,10 +1,8 @@
 logging:
-  file:
-    name: "logs/@project.build.finalName@.log"
   level:
-    root: info
-    '[net.zoostar]': debug
-    '[com.zoostarinc]': debug
+    root: warn
+    '[net.zoostar]': info
+    '[com.zoostarinc]': info
 
 server:
   forward-headers-strategy: framework
@@ -20,3 +18,6 @@ spring:
     hibernate:
       # sandbox convenience: update schema automatically; adjust for production
       ddl-auto: update
+  output:
+    ansi:
+      enabled: never

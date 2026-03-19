@@ -6,7 +6,18 @@ build:
   version: '@project.version@'
   timestamp: '@build.timestamp@'
 
+logging:
+  level:
+    root: info
+    '[net.zoostar]': trace
+    '[com.zoostarinc]': trace
+  file:
+    name: "logs/@project.build.finalName@.log"
+
 spring:
+  output:
+    ansi:
+      enabled: always
   profiles:
     active:
       - local # Load spring boot profile by default

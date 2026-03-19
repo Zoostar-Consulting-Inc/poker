@@ -1,5 +1,27 @@
-{"properties": [{
-  "name": "logs.base.dir",
-  "type": "java.lang.String",
-  "description": "Relative path for application log file"
-}]}
+{"properties": [
+  {
+    "name": "logs.base.dir",
+    "type": "java.lang.String",
+    "description": "Logs directory configuration. Can take relative or actual path."
+  },
+  {
+    "name": "request.tracker.exclusion.patterns",
+    "type": "java.lang.String",
+    "description": "API Request exclusion pattern configuration"
+  },
+  {
+    "name": "build.name",
+    "type": "java.lang.String",
+    "description": "Typically Jenkins build number"
+  },
+  {
+    "name": "build.timestamp",
+    "type": "java.lang.String",
+    "description": "Time when build was created, typically in ISO 8601 format in UTC timezone"
+  },
+  {
+    "name": "build.version",
+    "type": "java.lang.String",
+    "description": "Version of the build, typically in semantic versioning format (MAJOR.MINOR.PATCH)"
+  }
+]}
