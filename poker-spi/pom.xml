@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.zoostarinc.poker</groupId>
 		<artifactId>poker-parent</artifactId>
-		<version>3.4.0-SNAPSHOT</version>
+		<version>3.4.0</version>
 		<relativePath>..</relativePath>
 	</parent>
 	<artifactId>poker-spi</artifactId>
@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>com.zoostarinc.poker</groupId>
 			<artifactId>poker-core</artifactId>
-			<version>3.4.0-SNAPSHOT</version>
+			<version>3.4.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
