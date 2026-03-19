@@ -6,9 +6,17 @@ logging:
     '[net.zoostar]': debug
     '[com.zoostarinc]': debug
 
-logs:
-  base:
-    dir: logs
-
 server:
   forward-headers-strategy: framework
+
+spring:
+  datasource:
+    # Use a valid H2 JDBC URL. The previous value was malformed (missing the "file:" or "mem:" prefix
+    # and contained an incorrect ':' placement). For a file-based DB in the project, use `jdbc:h2:file:./...`.
+    # If you prefer an in-memory DB for sandbox use `jdbc:h2:mem:poker;DB_CLOSE_DELAY=-1` instead.
+    url: jdbc:h2:file:./data/poker/h2/poker
+    password: ${poker.datasource.password}
+  jpa:
+    hibernate:
+      # sandbox convenience: update schema automatically; adjust for production
+      ddl-auto: update
