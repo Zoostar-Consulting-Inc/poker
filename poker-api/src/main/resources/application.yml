@@ -11,6 +11,9 @@ logging:
     root: info
     '[net.zoostar]': trace
     '[com.zoostarinc]': trace
+  logback:
+    rollingpolicy:
+      file-name-pattern: "logs/archive/@project.build.finalName@-%d{yyyy-MM-dd}.%i.log.zip"
   file:
     name: "logs/@project.build.finalName@.log"
 
