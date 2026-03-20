@@ -1,4 +1,4 @@
-# <a href="https://poker.apigator.net" target="_blank">Poker API</a> [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=zci_poker&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=zci_poker)
+# [Poker API](https://poker.apigator.net) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=zci_poker&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=zci_poker)
 
 <p>Minimum Environment Requirements:<br/>
 
