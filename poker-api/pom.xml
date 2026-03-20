@@ -7,17 +7,17 @@
 	<parent>
 		<groupId>com.zoostarinc.poker</groupId>
 		<artifactId>poker-parent</artifactId>
-		<version>3.4.0-SNAPSHOT</version>
+		<version>3.5.0-SNAPSHOT</version>
 	</parent>
 	<properties>
-		<sonar.coverage.jacoco.xmlReportPaths>
-			../${project.artifactId}/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.coverage.jacoco.xmlReportPaths>../${project.artifactId}/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+		<tomcat.maven.deploy.phase>none</tomcat.maven.deploy.phase>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.zoostarinc.poker</groupId>
 			<artifactId>poker-spi</artifactId>
-			<version>3.4.0-SNAPSHOT</version>
+			<version>3.5.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
@@ -83,7 +83,7 @@
 				<executions>
 					<execution>
 						<id>tomcat-maven-deploy</id>
-						<phase>${maven.tomcat.skip}</phase>
+						<phase>${tomcat.maven.deploy.phase}</phase>
 						<goals>
 							<goal>redeploy</goal>
 						</goals>

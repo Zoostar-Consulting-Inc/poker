@@ -1,12 +1,4 @@
 # --- Spring Boot specific properties for local ---
-logging:
-  file:
-    name: "logs/@project.build.finalName@.log"
-  level:
-    root: info
-    '[net.zoostar]': trace
-    '[com.zoostarinc]': trace
-
 server:
   compression:
     enabled: true
