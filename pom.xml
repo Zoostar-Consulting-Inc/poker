@@ -45,4 +45,18 @@
 			</resource>
 		</resources>
 	</build>
+	<name>Poker API</name>
+	<url>https://poker.apigator.net</url>
+	<description>Building RESTful APIs for Poker.
+This project also servers as a template for creating any Java Enterprise projects on Spring Framework.</description>
+	<organization>
+		<name>Zoostar Cosulting, Inc.</name>
+	</organization>
+	<scm>
+		<url>https://github.com/Zoostar-Consulting-Inc/poker-parent</url>
+		<developerConnection>zoostar</developerConnection>
+	</scm>
+	<ciManagement>
+		<system>Jenkins</system>
+	</ciManagement>
 </project>

@@ -1,10 +1,10 @@
-# Poker API [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=zci_poker&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=zci_poker)
+# [Poker API](https://poker.apigator.net) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=zci_poker&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=zci_poker)
 
 <p>Minimum Environment Requirements:<br/>
 
 <ul>
-<li>JDK: 17+</li>
-<li>Eclipse: 4.28.x (2023-06)</li>
-<li>Apache Tomcat: 10.1.41</li>
-<li>Spring Boot: 3.4.6</li>
+<li>Build: Eclipse 4.32.x (2025-11)</li>
+<li>Compile: JDK 21+</li>
+<li>Execute: Spring Boot v3.5.11, Spring v6.2.16</li>
+<li>Deploy: Apache Tomcat 11+</li>
 </ul>
