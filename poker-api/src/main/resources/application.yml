@@ -7,6 +7,8 @@ build:
   timestamp: '@build.timestamp@'
 
 logging:
+  file:
+    name: "logs/@project.build.finalName@.log"
   level:
     root: info
     '[net.zoostar]': trace
@@ -14,8 +16,7 @@ logging:
   logback:
     rollingpolicy:
       file-name-pattern: "logs/archive/@project.build.finalName@-%d{yyyy-MM-dd}.%i.log.zip"
-  file:
-    name: "logs/@project.build.finalName@.log"
+      max-history: 10
 
 spring:
   output:
