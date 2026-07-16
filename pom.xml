@@ -59,4 +59,16 @@ This project also servers as a template for creating any Java Enterprise project
 	<ciManagement>
 		<system>Jenkins</system>
 	</ciManagement>
+	<repositories>
+		<repository>
+			<id>zoostar</id>
+			<url>https://archiva.zoostarinc.com/repository/internal/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 </project>
